@@ -1,3 +1,4 @@
 
 *.user
 TestProject.pro.user
+.qmake.stash

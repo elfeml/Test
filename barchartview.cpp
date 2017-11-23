@@ -5,7 +5,7 @@ BarChartView::BarChartView(QWidget *parent) : QWidget(parent)
 
 }
 
-BarChartView::display(QList<dataTuple> *data)
+void BarChartView::display(QList<dataTuple> *data)
 {
     QBarSet *set0 = new QBarSet("State");
 

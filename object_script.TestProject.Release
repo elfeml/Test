@@ -1,0 +1,16 @@
+INPUT(
+./release\maininterfacewindow.o
+./release\filereader.o
+./release\datatuple.o
+./release\barchartview.o
+./release\treemapifier.o
+./release\canvas.o
+./release\painter.o
+./release\rectangle.o
+./release\statecalculator.o
+./release\state.o
+./release\qrc_data.o
+./release\moc_maininterfacewindow.o
+./release\moc_barchartview.o
+./release\moc_painter.o
+);

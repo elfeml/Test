@@ -1,0 +1,16 @@
+INPUT(
+./debug\maininterfacewindow.o
+./debug\filereader.o
+./debug\datatuple.o
+./debug\barchartview.o
+./debug\treemapifier.o
+./debug\canvas.o
+./debug\painter.o
+./debug\rectangle.o
+./debug\statecalculator.o
+./debug\state.o
+./debug\qrc_data.o
+./debug\moc_maininterfacewindow.o
+./debug\moc_barchartview.o
+./debug\moc_painter.o
+);

@@ -21,7 +21,7 @@ class BarChartView : public QWidget
     Q_OBJECT
 public:
     explicit BarChartView(QWidget *parent = nullptr);
-    display(QList<dataTuple>* data);
+    void display(QList<dataTuple>* data);
 
 signals:
 
