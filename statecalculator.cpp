@@ -21,13 +21,13 @@ void StateCalculator::identifyRectangles(QList<dataTuple>* listofstates)
     xValue = 1;
     int rows = 5;
     int currentRow=0;
-    int multiplier = 400;
+    int multiplier = 550;
 
     for(int j=0; j < listofstates->size(); ++j)
     {
         if((double)(listofstates->at(j).count()*multiplier) / total == 0)
         {
-            width = 1;
+            width = 0.1;
         }
         else
         {
@@ -57,38 +57,47 @@ void StateCalculator::identifyRectangles(QList<dataTuple>* listofstates)
       (*listofstates)[j].setWidth(width);
       (*listofstates)[j].setHeight(height);
 
-//     calculateX(&listofstates->value(j));
+//     calculateX(listofstates->value(j));
+//    listofstates->value(j).setX(calculateX(listofstates->value(j)));
 //     calculateY((listofstates)[j]);
 //     calculateWidth((listofstates)[j]);
 //     calculateHeigth((listofstates)[j]);
+
+
+//      (*listofstates)[j].setX(calculateX((*listofstates)[j]));
+//      (*listofstates)[j].setY(calculateY((*listofstates)[j]));
+//      (*listofstates)[j].setX(calculateX((*listofstates)[j]));
+//      (*listofstates)[j].setX(calculateX((*listofstates)[j]));
 
     }
 
 }
 
-void StateCalculator::calculateX(dataTuple* data)
+// These methods arent used
+int StateCalculator::calculateX(dataTuple data)
 {
     int xValue;
 
-    data->setX(xValue);
+//  data->setX(xValue);
+    return xValue;
 }
 
-void StateCalculator::calculateY(dataTuple* data)
+void StateCalculator::calculateY(dataTuple data)
 {
     int yValue;
 
-    data->setY(yValue);
+//    data->setY(yValue);
 }
-void StateCalculator::calculateWidth(dataTuple* data)
+void StateCalculator::calculateWidth(dataTuple data)
 {
     int width;
 
-    data->setWidth(width);
+//    data->setWidth(width);
 }
 
-void StateCalculator::calculateHeigth(dataTuple* data)
+void StateCalculator::calculateHeigth(dataTuple data)
   {
     int height;
 
-    data->setHeight(height);
+//  data->setHeight(height);
   }

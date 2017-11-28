@@ -57,6 +57,7 @@ DISTFILES += \
 RESOURCES += \
     data.qrc
 
+LIBS += -lOpengl32 -lglut32
 win32 {
-    LIBS += -lOpengl32
+    LIBS += -lOpengl32 -lglut32
 }

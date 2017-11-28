@@ -66,6 +66,11 @@ FileReader::FileReader(QString filename)
     file.close();
 }
 
+//FileReader::~FileReader()
+//{
+//    delete m_listTuple;
+//}
+
 QList<dataTuple> *FileReader::getData()
 {
     return m_listTuple;// getData is called by mainInterface

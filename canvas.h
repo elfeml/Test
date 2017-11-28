@@ -1,12 +1,14 @@
 #ifndef CANVAS_H
 #define CANVAS_H
-
+//#include "GL/freeglut.h"
 #include <QOpenGLWidget>
 #include <QtOpenGL>
 #include <QOpenGLFunctions>
 #include "global.h"
 #include "datatuple.h"
 #include <math.h>
+#include "QPointF"
+
 
 
 
@@ -22,13 +24,14 @@ public:
     Canvas(QWidget *parent = 0);
 //  void updateGL();
     void renderRectangle(int x, int y, int width, int height, bool boundary, QVector4D color);
-        QList<dataTuple>* listofStates;
+        QList<dataTuple>* listofStates = nullptr;
 
 private:
     void redraw();
     bool prepareDraw();
-signals:
-
+    void glPrint( void* font, const char* str );
+    void glPrintString( float x, float y, std::string str );
+    QPointF ConvertScreen(QPointF p);
 
 };
 

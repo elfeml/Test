@@ -1,5 +1,10 @@
 #include "canvas.h"
 #include "canvas.h"
+#include "QPainter.h"
+#include "QPen.h"
+#include "QFont.h"
+#include "QPointF"
+
 
 Canvas::Canvas(QWidget *parent) : QOpenGLWidget(parent)
 {
@@ -36,7 +41,7 @@ void Canvas::resizeGL(int w, int h)
 bool Canvas::prepareDraw()
 {
    glPointSize( 1 );
-   glOrtho(0,100,0,100,1,0);
+   glOrtho(0,102,0,102,1,0);
    glMatrixMode( GL_MODELVIEW );
    glLoadIdentity();
    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -44,24 +49,86 @@ bool Canvas::prepareDraw()
 }
 
 
+void Canvas::glPrintString( float x, float y, std::string str )
+{
+//   glRasterPos2f( x, y );
+
+//   glPrint( GLUT_BITMAP_HELVETICA_12, str.c_str());
+
+    //Greate the painting object
+    QPainter painter(this);
+
+    //Get the current font
+    QFont font = painter.font() ;
+    //Increase the current text size
+    font.setPointSize(font.pointSize() * 1.0f);
+    //Assigns the painter the modified font
+    painter.setFont(font);
+    //Assigns the window the correct viewport.
+    painter.setViewport(0,0,width(),height());
+
+
+    //Create a Pen to draw with - and assign a line width.
+    QPen pen;
+    pen.setWidth(100);
+    //Change pen colour
+    pen.setColor(Qt::red);
+    //Assign painter the new pen.
+    painter.setPen(pen);
+
+
+    //Draw some text
+    QPointF p = ConvertScreen(QPointF(x,y));
+    //QPointF p = QPointF(x,y);
+    //qDebug() << height() << width() << p.x() << p.y();
+    painter.drawText(p,QString::fromStdString(str));
+
+}
+
+QPointF Canvas::ConvertScreen(QPointF p)
+{
+    QPointF returnVal;
+    float maxX = width();
+    float maxY = height();
+
+    float maxX2 = 102;
+    float maxY2 = 102;
+
+    float xRatio = p.x()/maxX2;
+    float yRatio = p.y()/maxY2;
+
+    float newX = maxX*xRatio;
+    float newY = maxY*yRatio;
+
+   // qDebug() << newX << newY;
+
+    returnVal.setX(newX);
+    returnVal.setY(height()-newY);
+
+    return returnVal;
+}
+
+
+
+
+
 void Canvas::redraw()
 {
     prepareDraw();
     glColor3f(0,0,0);
-//   renderRectangle(0,0,10,10);
-    int x = 18;
-    int y = 10;
-    int width = 10;
-    int height = 80;
-    int seperator = 3;
 
+//   renderRectangle(0,0,10,10);
+//    int x = 18;
+//    int y = 10;
+//    int width = 10;
+//    int height = 80;
+//    int seperator = 3;
+//
 //    for(int i =0; i < 5; ++i)
 //    {
 //        renderRectangle(x+(i*width)+(i*seperator),
 //                        y, width, height, true);
-
 //    }
-
 
 
    for(int i =0; i < listofStates->size(); ++i)
@@ -73,6 +140,9 @@ void Canvas::redraw()
 
        renderRectangle((*listofStates)[i].getX(), (*listofStates)[i].getY(), (*listofStates)[i].getWidth(),
                         (*listofStates)[i].getHeight(), true, color);
+
+       std::string stateName= ((*listofStates)[i].stateName().toStdString());
+       glPrintString((*listofStates)[i].getX(),(*listofStates)[i].getY(), stateName);
 
     }
 }

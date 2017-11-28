@@ -10,10 +10,10 @@ public:
     StateCalculator();
      static void identifyRectangles(QList<dataTuple>* listofstates);
 private:
-   void calculateX(dataTuple *data);
-   void calculateY(dataTuple *data);
-      void calculateWidth(dataTuple *data);
-        void calculateHeigth(dataTuple *data);
+   static int calculateX(dataTuple data);
+   static void calculateY(dataTuple data);
+    static void calculateWidth(dataTuple data);
+    static void calculateHeigth(dataTuple data);
 
 
 

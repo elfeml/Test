@@ -9,6 +9,7 @@ class FileReader
 {
 public:
     FileReader(QString filename);
+//    ~FileReader();
 
     QList<dataTuple> *m_listTuple;
     QList<dataTuple>* getData();
