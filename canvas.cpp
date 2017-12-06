@@ -1,15 +1,16 @@
+ #include "canvas.h"
 #include "canvas.h"
-#include "canvas.h"
-#include "QPainter.h"
-#include "QPen.h"
-#include "QFont.h"
-#include "QPointF"
+#include <QPainter>
+#include <QPen>
+#include <QFont>
+#include <QPointF>
 
 
 Canvas::Canvas(QWidget *parent) : QOpenGLWidget(parent)
 {
     qDebug() << "test";
 }
+
 //set up
 void Canvas::initializeGL()
 {
@@ -26,7 +27,8 @@ void Canvas::initializeGL()
 
 void Canvas::paintGL()
 {
-    if(listofStates != nullptr)
+    if(regions != nullptr)
+
         redraw();
 }
 
@@ -41,18 +43,17 @@ void Canvas::resizeGL(int w, int h)
 bool Canvas::prepareDraw()
 {
    glPointSize( 1 );
-   glOrtho(0,102,0,102,1,0);
+   glOrtho(0,100,0,100,1,0);
    glMatrixMode( GL_MODELVIEW );
    glLoadIdentity();
    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
    return true;
 }
 
-
+//Printing Labels
 void Canvas::glPrintString( float x, float y, std::string str )
 {
 //   glRasterPos2f( x, y );
-
 //   glPrint( GLUT_BITMAP_HELVETICA_12, str.c_str());
 
     //Greate the painting object
@@ -66,7 +67,6 @@ void Canvas::glPrintString( float x, float y, std::string str )
     painter.setFont(font);
     //Assigns the window the correct viewport.
     painter.setViewport(0,0,width(),height());
-
 
     //Create a Pen to draw with - and assign a line width.
     QPen pen;
@@ -85,14 +85,15 @@ void Canvas::glPrintString( float x, float y, std::string str )
 
 }
 
+//Convert screen size from opengl to painter
 QPointF Canvas::ConvertScreen(QPointF p)
 {
     QPointF returnVal;
     float maxX = width();
     float maxY = height();
 
-    float maxX2 = 102;
-    float maxY2 = 102;
+    float maxX2 = 100;
+    float maxY2 = 100;
 
     float xRatio = p.x()/maxX2;
     float yRatio = p.y()/maxY2;
@@ -109,49 +110,63 @@ QPointF Canvas::ConvertScreen(QPointF p)
 }
 
 
-
-
-
 void Canvas::redraw()
 {
     prepareDraw();
     glColor3f(0,0,0);
 
-//   renderRectangle(0,0,10,10);
-//    int x = 18;
-//    int y = 10;
-//    int width = 10;
-//    int height = 80;
-//    int seperator = 3;
-//
-//    for(int i =0; i < 5; ++i)
-//    {
-//        renderRectangle(x+(i*width)+(i*seperator),
-//                        y, width, height, true);
-//    }
+  //  renderRectangle(0,10,10,10,true);
+    int x = 18;
+    int y = 10;
+    int width = 10;
+    int height = 80;
+    int seperator = 3;
 
+  for(int i =0; i<regions->size(); ++i)
+  {
+      QVector4D color;
+      color.setX(((double) rand() / (RAND_MAX)) );
+      color.setY(((double) rand() / (RAND_MAX)) );
+      color.setZ(((double) rand() / (RAND_MAX)) );
 
-   for(int i =0; i < listofStates->size(); ++i)
-    {
-       QVector4D color;
-       color.setX(((double) rand() / (RAND_MAX)) );
-       color.setY(((double) rand() / (RAND_MAX)) );
-       color.setZ(((double) rand() / (RAND_MAX)) );
+      renderRectangle((*regions)[i].getX(), (*regions)[i].getY(), (*regions)[i].getWidth(),
+                      (*regions)[i].getHeight(), true,color);
 
-       renderRectangle((*listofStates)[i].getX(), (*listofStates)[i].getY(), (*listofStates)[i].getWidth(),
-                        (*listofStates)[i].getHeight(), true, color);
-
-       std::string stateName= ((*listofStates)[i].stateName().toStdString());
-       glPrintString((*listofStates)[i].getX(),(*listofStates)[i].getY(), stateName);
+     for (int j =0; j<states->size(); ++j)
+      {
+            QVector4D stateColor;
+          stateColor.setX(0.0f );
+          stateColor.setY(0.0f);
+          stateColor.setZ(0.0f);
+          stateColor.setW(1.0f);
+          renderRectangle((*states)[j].getX(), (*states)[j].getY(), (*states)[j].getWidth(),
+                          (*states)[j].getHeight(), true,stateColor);
 
     }
+  }
+
+//Drawing 50 rectangles with printing labels
+//   for(int i =0; i < listofStates->size(); ++i)
+//    {
+//       QVector4D color;
+//       color.setX(((double) rand() / (RAND_MAX)) );
+//       color.setY(((double) rand() / (RAND_MAX)) );
+//       color.setZ(((double) rand() / (RAND_MAX)) );
+//
+//       renderRectangle((*listofStates)[i].getX(), (*listofStates)[i].getY(), (*listofStates)[i].getWidth(),
+//                        (*listofStates)[i].getHeight(), true, color);
+//
+//       std::string stateName= ((*listofStates)[i].stateName().toStdString());
+//       glPrintString((*listofStates)[i].getX(),(*listofStates)[i].getY(), stateName);
+//
+//    }
+
 }
 
 
-void Canvas::renderRectangle(int x, int y, int width, int height, bool boundary,
-                             QVector4D color)
+void Canvas::renderRectangle(int x, int y, int width, int height, bool boundary,QVector4D color)
 {
-//    glColor4f(1,0,0,1); //255/255
+    glColor4f(1,0,0,1); //255/255
     glColor4f(color.x(),color.y(),color.z(),1);
     glBegin(GL_POLYGON);
     glVertex2f(x,y);
@@ -163,7 +178,7 @@ void Canvas::renderRectangle(int x, int y, int width, int height, bool boundary,
     if(boundary)
     {
         glLineWidth(3);
-        glColor3f(0,0,0);
+        //glColor3f(0,0,0);
         glBegin(GL_LINE_STRIP);
         glVertex2f(x,y);
         glVertex2f(x+width,y);

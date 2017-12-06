@@ -32,7 +32,8 @@ SOURCES += \
     painter.cpp \
     rectangle.cpp \
     statecalculator.cpp \
-    state.cpp
+    dataregion.cpp \
+    datastate.cpp
 
 HEADERS += \
         maininterfacewindow.h \
@@ -43,8 +44,9 @@ HEADERS += \
     painter.h \
     rectangle.h \
     statecalculator.h \
-    state.h \
-    global.h
+    global.h \
+    dataregion.h \
+    datastate.h
 
 FORMS += \
         maininterfacewindow.ui

@@ -8,7 +8,8 @@ INPUT(
 ./release\painter.o
 ./release\rectangle.o
 ./release\statecalculator.o
-./release\state.o
+./release\dataregion.o
+./release\datastate.o
 ./release\qrc_data.o
 ./release\moc_maininterfacewindow.o
 ./release\moc_barchartview.o

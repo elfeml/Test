@@ -37,9 +37,16 @@ public:
     int getHeight() const;
     void setHeight(int value);
 
+
+
+    QString getRegionName() const;
+    void setRegionName(const QString &regionName);
+
 private:
     double m_time;
     QString m_stateName;
+    QString m_regionName;
+
     int m_count;
     float m_incidence;
 

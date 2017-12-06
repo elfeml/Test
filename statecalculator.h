@@ -3,20 +3,22 @@
 
 #include "global.h"
 #include "datatuple.h"
+#include "dataregion.h"
+#include "dataState.h"
+
 
 class StateCalculator
 {
 public:
     StateCalculator();
-     static void identifyRectangles(QList<dataTuple>* listofstates);
+     static void identifyRegionRectangles(QList<dataTuple>* listofstates,QList<dataRegion>* regions);
+     static void identifyStateRectangles(QList<dataTuple>* listofstates,QList<dataRegion>* regions, QList<dataState>* states);
+
 private:
-   static int calculateX(dataTuple data);
-   static void calculateY(dataTuple data);
-    static void calculateWidth(dataTuple data);
-    static void calculateHeigth(dataTuple data);
-
-
-
+   static int calculateX(dataRegion data);
+   static void calculateY(dataRegion data);
+   static void calculateWidth(dataRegion data);
+   static void calculateHeigth(dataRegion data);
 
 };
 

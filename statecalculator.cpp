@@ -7,34 +7,36 @@ StateCalculator::StateCalculator()
 
 }
 
-void StateCalculator::identifyRectangles(QList<dataTuple>* listofstates)
+void StateCalculator::identifyRegionRectangles(QList<dataTuple>* listofstates, QList<dataRegion>* regions)
 {
 
     int total=0;
-    for(int i=0; i< listofstates->size(); ++i)
+    for(int i=0; i< regions->size(); ++i)
     {
-       total+=(*listofstates)[i].count();
-
+       total+=(*regions)[i].count();
+       qDebug()<<(*regions)[i].getRegion()<< total;
     }
+
     double width, height, xValue, yValue;
-    yValue =110;
+    yValue =195;
     xValue = 1;
     int rows = 5;
     int currentRow=0;
-    int multiplier = 550;
+    int multiplier = 100;
 
-    for(int j=0; j < listofstates->size(); ++j)
+    for(int j=0; j < regions->size(); ++j)
     {
-        if((double)(listofstates->at(j).count()*multiplier) / total == 0)
+        if((double)(regions->at(j).count()*multiplier) / total == 0)
         {
-            width = 0.1;
+            width = 10.1;
         }
         else
         {
-            width =(double) (listofstates->at(j).count()*multiplier) / total;
+            width =(double) (regions->at(j).count()*multiplier) / total;
+
         }
 
-      height = 5;
+      height = 95;
 
        if(j % rows == 0) // if new row
       {
@@ -49,32 +51,86 @@ void StateCalculator::identifyRectangles(QList<dataTuple>* listofstates)
       }
       else
       {
-          xValue = listofstates->at(j-1).getX()+listofstates->at(j-1).getWidth()+1;
+          xValue = regions->at(j-1).getX()+regions->at(j-1).getWidth()+1;
       }
 
-      (*listofstates)[j].setX(xValue);
-      (*listofstates)[j].setY(yValue);
-      (*listofstates)[j].setWidth(width);
-      (*listofstates)[j].setHeight(height);
-
-//     calculateX(listofstates->value(j));
-//    listofstates->value(j).setX(calculateX(listofstates->value(j)));
-//     calculateY((listofstates)[j]);
-//     calculateWidth((listofstates)[j]);
-//     calculateHeigth((listofstates)[j]);
-
-
-//      (*listofstates)[j].setX(calculateX((*listofstates)[j]));
-//      (*listofstates)[j].setY(calculateY((*listofstates)[j]));
-//      (*listofstates)[j].setX(calculateX((*listofstates)[j]));
-//      (*listofstates)[j].setX(calculateX((*listofstates)[j]));
+      (*regions)[j].setX(xValue);
+      (*regions)[j].setY(yValue);
+      (*regions)[j].setWidth(width);
+      (*regions)[j].setHeight(height);
 
     }
 
 }
 
+void StateCalculator::identifyStateRectangles(QList<dataTuple>* listofstates, QList<dataRegion>* regions, QList<dataState> *states)
+{
+//NOT FINISHED
+    int total=0;
+    for(int i=0; i< states->size(); ++i)
+    {
+       total+=(*states)[i].count();
+
+    }
+    double width, height, xValue, yValue;
+    yValue =195;
+    xValue = 1;
+    int rows = 5;
+    int currentRow=0;
+    int multiplier = 100;
+
+    for(int j=0; j < states->size(); ++j)
+    {
+
+        if((double)(states->at(j).count()*multiplier) / total == 0)
+        {
+            height = 0.1;
+        }
+        else
+        {
+            height =(double) (states->at(j).count()*multiplier) / total;
+
+        }
+
+        for(int k=0; k < regions->size(); ++k)
+        {
+       // control the regions names to draw state rectangle inside its region rectangle
+         if(QString::compare(states->at(k).getStateRegion(), regions->at(k).getRegion(), Qt::CaseInsensitive) == 0)
+          {
+            width=regions->at(k).getWidth()-10;
+            xValue=regions->at(k).getX()+5;
+          }
+        }
+
+//       if(j % rows == 0) // if new row
+//      {
+//          yValue = yValue -width;  //
+//          currentRow = -1;
+//      }
+//      currentRow++;
+
+//      if (currentRow == 0) // if it is first row
+//      {
+//          yValue = 1;
+//      }
+//      else
+//      {
+//          yValue = states->at(j-1).getY()+states->at(j-1).getHeight()+1;
+//      }
+
+      (*states)[j].setX(xValue);
+      (*states)[j].setY(yValue);
+      (*states)[j].setWidth(width);
+      (*states)[j].setHeight(height);
+
+        yValue-=height-5;
+    }
+
+}
+
+
 // These methods arent used
-int StateCalculator::calculateX(dataTuple data)
+int StateCalculator::calculateX(dataRegion data)
 {
     int xValue;
 
@@ -82,20 +138,20 @@ int StateCalculator::calculateX(dataTuple data)
     return xValue;
 }
 
-void StateCalculator::calculateY(dataTuple data)
+void StateCalculator::calculateY(dataRegion data)
 {
     int yValue;
 
 //    data->setY(yValue);
 }
-void StateCalculator::calculateWidth(dataTuple data)
+void StateCalculator::calculateWidth(dataRegion data)
 {
     int width;
 
 //    data->setWidth(width);
 }
 
-void StateCalculator::calculateHeigth(dataTuple data)
+void StateCalculator::calculateHeigth(dataRegion data)
   {
     int height;
 

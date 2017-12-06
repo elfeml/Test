@@ -7,6 +7,8 @@
 #include "global.h"
 #include "datatuple.h"
 #include <math.h>
+#include "dataregion.h"
+#include "dataState.h"
 #include "QPointF"
 
 
@@ -24,7 +26,9 @@ public:
     Canvas(QWidget *parent = 0);
 //  void updateGL();
     void renderRectangle(int x, int y, int width, int height, bool boundary, QVector4D color);
-        QList<dataTuple>* listofStates = nullptr;
+       //QList<dataTuple>* listofStates = nullptr;
+         QList<dataRegion>* regions = nullptr;
+         QList<dataState>* states = nullptr;
 
 private:
     void redraw();

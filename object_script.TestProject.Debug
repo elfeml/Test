@@ -8,7 +8,8 @@ INPUT(
 ./debug\painter.o
 ./debug\rectangle.o
 ./debug\statecalculator.o
-./debug\state.o
+./debug\dataregion.o
+./debug\datastate.o
 ./debug\qrc_data.o
 ./debug\moc_maininterfacewindow.o
 ./debug\moc_barchartview.o

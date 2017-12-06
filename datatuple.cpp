@@ -93,4 +93,18 @@ void dataTuple::setHeight(int value)
     height = value;
 }
 
+QString dataTuple::getRegionName() const
+{
+    return m_regionName;
+}
+
+void dataTuple::setRegionName(const QString &regionName)
+{
+    m_regionName = regionName;
+}
+
+
+
+
+
 

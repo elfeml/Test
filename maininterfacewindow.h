@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include <QList>
 #include "datatuple.h"
+#include "dataregion.h"
+#include "dataState.h"
+
 #include "filereader.h"
 #include "statecalculator.h"
 #include <QStandardItemModel>
@@ -39,6 +42,9 @@ private:
     Ui::MainInterfaceWindow *ui;
 
     QList<dataTuple> *m_dataTuple;
+    QList<dataState> *m_dataState;
+    QList<dataRegion> *m_dataRegion;
+
     void setUpCharts(QList<dataTuple>* data);
 };
 
