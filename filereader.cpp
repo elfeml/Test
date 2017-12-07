@@ -78,7 +78,7 @@ FileReader::FileReader(QString filename)
 
 
 //STATE LIST
-                uniqueState = true;
+                //uniqueState = true;
 
                 for(int j = 0; j < m_listTuple->size(); ++j)
                 {
@@ -99,7 +99,7 @@ FileReader::FileReader(QString filename)
 
 
 //REGION LIST
-                uniqueRegion = true;
+               // uniqueRegion = true;
 
                 for(int k = 0; k < m_listRegion->size(); ++k)
                 {

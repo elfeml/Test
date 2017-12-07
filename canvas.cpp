@@ -121,6 +121,7 @@ void Canvas::redraw()
     int width = 10;
     int height = 80;
     int seperator = 3;
+    int a=1;
 
   for(int i =0; i<regions->size(); ++i)
   {
@@ -131,6 +132,8 @@ void Canvas::redraw()
 
       renderRectangle((*regions)[i].getX(), (*regions)[i].getY(), (*regions)[i].getWidth(),
                       (*regions)[i].getHeight(), true,color);
+      std::string name= ((*regions)[i].getRegion().toStdString());
+           glPrintString((*regions)[i].getX(),(*regions)[i].getY()+a, name);
 
      for (int j =0; j<states->size(); ++j)
       {
@@ -141,6 +144,7 @@ void Canvas::redraw()
           stateColor.setW(1.0f);
           renderRectangle((*states)[j].getX(), (*states)[j].getY(), (*states)[j].getWidth(),
                           (*states)[j].getHeight(), true,stateColor);
+
 
     }
   }

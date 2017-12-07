@@ -77,7 +77,7 @@ void StateCalculator::identifyStateRectangles(QList<dataTuple>* listofstates, QL
     xValue = 1;
     int rows = 5;
     int currentRow=0;
-    int multiplier = 100;
+    int multiplier = 10;
 
     for(int j=0; j < states->size(); ++j)
     {

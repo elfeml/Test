@@ -20,6 +20,7 @@ private:
    static void calculateWidth(dataRegion data);
    static void calculateHeigth(dataRegion data);
 
+
 };
 
 #endif // STATECALCULATOR_H
