@@ -25,7 +25,7 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 public:
     Canvas(QWidget *parent = 0);
 //  void updateGL();
-    void renderRectangle(int x, int y, int width, int height, bool boundary, QVector4D color);
+    void renderRectangle(int x, int y, int width, double height, bool boundary, QVector4D color);
        //QList<dataTuple>* listofStates = nullptr;
          QList<dataRegion>* regions = nullptr;
          QList<dataState>* states = nullptr;

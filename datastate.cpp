@@ -55,16 +55,6 @@ void dataState::setWidth(int value)
     width = value;
 }
 
-int dataState::getHeight() const
-{
-    return height;
-}
-
-void dataState::setHeight(int value)
-{
-    height = value;
-}
-
 QString dataState::getStateRegion() const
 {
     return m_stateRegion;
@@ -73,4 +63,14 @@ QString dataState::getStateRegion() const
 void dataState::setStateRegion(const QString &stateRegion)
 {
     m_stateRegion = stateRegion;
+}
+
+double dataState::getHeight() const
+{
+    return height;
+}
+
+void dataState::setHeight(double value)
+{
+    height = value;
 }

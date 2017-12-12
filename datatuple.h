@@ -37,8 +37,6 @@ public:
     int getHeight() const;
     void setHeight(int value);
 
-
-
     QString getRegionName() const;
     void setRegionName(const QString &regionName);
 
@@ -54,7 +52,6 @@ private:
     int y;
     int width;
     int height;
-
 
 };
 

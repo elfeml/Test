@@ -24,11 +24,12 @@ public:
     int getWidth() const;
     void setWidth(int value);
 
-    int getHeight() const;
-    void setHeight(int value);
 
     QString getStateRegion() const;
     void setStateRegion(const QString &stateRegion);
+
+    double getHeight() const;
+    void setHeight(double value);
 
 private:
     QString m_state;
@@ -38,7 +39,7 @@ private:
     int x;
     int y;
     int width;
-    int height;
+    double height;
 };
 
 #endif // DATASTATE_H

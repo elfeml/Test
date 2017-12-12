@@ -13,16 +13,19 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QOpenGLWidget>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
 #include <QtWidgets/QToolBar>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include <barchartview.h>
 #include <canvas.h>
@@ -36,7 +39,11 @@ public:
     QAction *actionOpen_CSV;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout_3;
+    QFrame *frame;
+    QVBoxLayout *verticalLayout_2;
     QTableView *tableView;
+    QFrame *frame_2;
+    QPushButton *pushButton;
     QTabWidget *tabWidget;
     QWidget *tab;
     QHBoxLayout *horizontalLayout_2;
@@ -68,7 +75,15 @@ public:
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        tableView = new QTableView(centralWidget);
+        frame = new QFrame(centralWidget);
+        frame->setObjectName(QStringLiteral("frame"));
+        frame->setFrameShape(QFrame::StyledPanel);
+        frame->setFrameShadow(QFrame::Raised);
+        verticalLayout_2 = new QVBoxLayout(frame);
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        tableView = new QTableView(frame);
         tableView->setObjectName(QStringLiteral("tableView"));
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
         sizePolicy.setHorizontalStretch(0);
@@ -77,7 +92,20 @@ public:
         tableView->setSizePolicy(sizePolicy);
         tableView->setMinimumSize(QSize(400, 600));
 
-        horizontalLayout_3->addWidget(tableView);
+        verticalLayout_2->addWidget(tableView);
+
+        frame_2 = new QFrame(frame);
+        frame_2->setObjectName(QStringLiteral("frame_2"));
+        frame_2->setFrameShape(QFrame::StyledPanel);
+        frame_2->setFrameShadow(QFrame::Raised);
+        pushButton = new QPushButton(frame_2);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setGeometry(QRect(20, -18, 341, 41));
+
+        verticalLayout_2->addWidget(frame_2);
+
+
+        horizontalLayout_3->addWidget(frame);
 
         tabWidget = new QTabWidget(centralWidget);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
@@ -156,7 +184,7 @@ public:
 
         retranslateUi(MainInterfaceWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(MainInterfaceWindow);
@@ -166,6 +194,7 @@ public:
     {
         MainInterfaceWindow->setWindowTitle(QApplication::translate("MainInterfaceWindow", "MainInterfaceWindow", Q_NULLPTR));
         actionOpen_CSV->setText(QApplication::translate("MainInterfaceWindow", "Open CSV", Q_NULLPTR));
+        pushButton->setText(QApplication::translate("MainInterfaceWindow", "PushButton", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainInterfaceWindow", "Chart", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainInterfaceWindow", "OpenGL", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainInterfaceWindow", "QTPaint", Q_NULLPTR));

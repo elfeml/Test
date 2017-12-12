@@ -65,3 +65,15 @@ void dataRegion::setRegion(const QString &region)
     m_region = region;
 }
 
+int dataRegion::getNumberofStates() const
+{
+    return m_numberofStates;
+}
+
+void dataRegion::addState()
+{
+    m_numberofStates++;
+}
+
+
+

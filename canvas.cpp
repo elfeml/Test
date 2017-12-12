@@ -123,12 +123,16 @@ void Canvas::redraw()
     int seperator = 3;
     int a=1;
 
+
   for(int i =0; i<regions->size(); ++i)
   {
       QVector4D color;
-      color.setX(((double) rand() / (RAND_MAX)) );
-      color.setY(((double) rand() / (RAND_MAX)) );
-      color.setZ(((double) rand() / (RAND_MAX)) );
+      color.setX(((0)) );
+      color.setY(( (0)) );
+      color.setZ(( (0)) );
+      //      color.setX(((double) rand() / (RAND_MAX)) );
+      //      color.setY(((double) rand() / (RAND_MAX)) );
+      //      color.setZ(((double) rand() / (RAND_MAX)) );
 
       renderRectangle((*regions)[i].getX(), (*regions)[i].getY(), (*regions)[i].getWidth(),
                       (*regions)[i].getHeight(), true,color);
@@ -137,13 +141,18 @@ void Canvas::redraw()
 
      for (int j =0; j<states->size(); ++j)
       {
-            QVector4D stateColor;
-          stateColor.setX(0.0f );
-          stateColor.setY(0.0f);
-          stateColor.setZ(0.0f);
-          stateColor.setW(1.0f);
+            QVector4D color;
+//          stateColor.setX(0.0f );
+//          stateColor.setY(0.0f);
+//          stateColor.setZ(0.0f);
+//          stateColor.setW(1.0f);
+          color.setX(((double) rand() / (RAND_MAX)) );
+          color.setY(((double) rand() / (RAND_MAX)) );
+          color.setZ(((double) rand() / (RAND_MAX)) );
           renderRectangle((*states)[j].getX(), (*states)[j].getY(), (*states)[j].getWidth(),
-                          (*states)[j].getHeight(), true,stateColor);
+                          (*states)[j].getHeight()+5, true,color);
+          std::string name= ((*states)[j].state().toStdString());
+               glPrintString((*states)[j].getX(),(*states)[j].getY(), name);
 
 
     }
@@ -168,7 +177,7 @@ void Canvas::redraw()
 }
 
 
-void Canvas::renderRectangle(int x, int y, int width, int height, bool boundary,QVector4D color)
+void Canvas::renderRectangle(int x, int y, int width, double height, bool boundary,QVector4D color)
 {
     glColor4f(1,0,0,1); //255/255
     glColor4f(color.x(),color.y(),color.z(),1);

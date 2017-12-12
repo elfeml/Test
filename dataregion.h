@@ -28,9 +28,13 @@ public:
     QString getRegion() const;
     void setRegion(const QString &region);
 
+    int getNumberofStates() const;
+    void addState();
+
 private:
     QString m_region;
     int m_count;
+    int m_numberofStates=1;
 
     int x;
     int y;

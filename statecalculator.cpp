@@ -7,14 +7,17 @@ StateCalculator::StateCalculator()
 
 }
 
+
 void StateCalculator::identifyRegionRectangles(QList<dataTuple>* listofstates, QList<dataRegion>* regions)
 {
 
     int total=0;
+
     for(int i=0; i< regions->size(); ++i)
     {
-       total+=(*regions)[i].count();
-       qDebug()<<(*regions)[i].getRegion()<< total;
+       total+=(*regions)[i].count();   
+
+       qDebug()<< (*regions)[i].getRegion()<<(*regions)[i].count();
     }
 
     double width, height, xValue, yValue;
@@ -67,63 +70,56 @@ void StateCalculator::identifyStateRectangles(QList<dataTuple>* listofstates, QL
 {
 //NOT FINISHED
     int total=0;
+
     for(int i=0; i< states->size(); ++i)
     {
        total+=(*states)[i].count();
-
+       qDebug()<< (*states)[i].state()<<(*states)[i].count();
     }
+
     double width, height, xValue, yValue;
-    yValue =195;
+    yValue =95;
     xValue = 1;
-    int rows = 5;
-    int currentRow=0;
-    int multiplier = 10;
+    double multiplier;
+    double gap=1.5;
+    double regHeight=95;
 
-    for(int j=0; j < states->size(); ++j)
+
+    for(int j=0; j < regions->size(); ++j)
     {
-
-        if((double)(states->at(j).count()*multiplier) / total == 0)
+        multiplier=(regHeight-((double)regions->at(j).getNumberofStates()*gap))/(double)regions->at(j).count();
+        for(int k=0; k < states->size(); ++k)
         {
-            height = 0.1;
-        }
-        else
-        {
-            height =(double) (states->at(j).count()*multiplier) / total;
 
-        }
-
-        for(int k=0; k < regions->size(); ++k)
-        {
-       // control the regions names to draw state rectangle inside its region rectangle
-         if(QString::compare(states->at(k).getStateRegion(), regions->at(k).getRegion(), Qt::CaseInsensitive) == 0)
+         if(QString::compare(states->at(k).getStateRegion(), regions->at(j).getRegion(), Qt::CaseInsensitive) == 0)
           {
-            width=regions->at(k).getWidth()-10;
-            xValue=regions->at(k).getX()+5;
+             if((double)(states->at(k).count() == 0))
+             {
+                 height = 0.1;
+                 if((double)regions->at(j).getNumberofStates()==1)
+                     height=regions->at(j).getHeight();
+             }
+
+
+             else
+             {   //state rectangle height
+
+                 height =((double)(states->at(k).count()*multiplier));
+            }
+
+            width=regions->at(j).getWidth();
+            xValue=regions->at(j).getX();
+            (*states)[k].setX(xValue);
+            (*states)[k].setY(yValue);
+            (*states)[k].setWidth(width);
+            (*states)[k].setHeight(height);
+             yValue-=height+gap;
           }
+        // height=(height-((double)regions->at(k).getNumberofStates()*gap))/(double)regions->at(k).count();
         }
 
-//       if(j % rows == 0) // if new row
-//      {
-//          yValue = yValue -width;  //
-//          currentRow = -1;
-//      }
-//      currentRow++;
+         yValue=95;
 
-//      if (currentRow == 0) // if it is first row
-//      {
-//          yValue = 1;
-//      }
-//      else
-//      {
-//          yValue = states->at(j-1).getY()+states->at(j-1).getHeight()+1;
-//      }
-
-      (*states)[j].setX(xValue);
-      (*states)[j].setY(yValue);
-      (*states)[j].setWidth(width);
-      (*states)[j].setHeight(height);
-
-        yValue-=height-5;
     }
 
 }
