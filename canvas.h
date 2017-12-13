@@ -22,6 +22,7 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
     void resizeGL(int w, int h);
 
 
+
 public:
     Canvas(QWidget *parent = 0);
 //  void updateGL();
@@ -29,6 +30,7 @@ public:
        //QList<dataTuple>* listofStates = nullptr;
          QList<dataRegion>* regions = nullptr;
          QList<dataState>* states = nullptr;
+         void drawActivate(bool activate);
 
 private:
     void redraw();
@@ -36,6 +38,8 @@ private:
     void glPrint( void* font, const char* str );
     void glPrintString( float x, float y, std::string str );
     QPointF ConvertScreen(QPointF p);
+    bool m_activate =false;
+
 
 };
 

@@ -109,6 +109,10 @@ QPointF Canvas::ConvertScreen(QPointF p)
     return returnVal;
 }
 
+//void Canvas::DrawActivate(){
+
+
+//}
 
 void Canvas::redraw()
 {
@@ -127,17 +131,20 @@ void Canvas::redraw()
   for(int i =0; i<regions->size(); ++i)
   {
       QVector4D color;
-      color.setX(((0)) );
-      color.setY(( (0)) );
-      color.setZ(( (0)) );
-      //      color.setX(((double) rand() / (RAND_MAX)) );
-      //      color.setY(((double) rand() / (RAND_MAX)) );
-      //      color.setZ(((double) rand() / (RAND_MAX)) );
+//      color.setX(((0)) );
+//      color.setY(( (0)) );
+//      color.setZ(( (0)) );
+        color.setX(((double) rand() / (RAND_MAX)) );
+        color.setY(((double) rand() / (RAND_MAX)) );
+        color.setZ(((double) rand() / (RAND_MAX)) );
 
       renderRectangle((*regions)[i].getX(), (*regions)[i].getY(), (*regions)[i].getWidth(),
                       (*regions)[i].getHeight(), true,color);
       std::string name= ((*regions)[i].getRegion().toStdString());
            glPrintString((*regions)[i].getX(),(*regions)[i].getY()+a, name);
+
+
+   if(m_activate){
 
      for (int j =0; j<states->size(); ++j)
       {
@@ -149,13 +156,14 @@ void Canvas::redraw()
           color.setX(((double) rand() / (RAND_MAX)) );
           color.setY(((double) rand() / (RAND_MAX)) );
           color.setZ(((double) rand() / (RAND_MAX)) );
+
           renderRectangle((*states)[j].getX(), (*states)[j].getY(), (*states)[j].getWidth(),
                           (*states)[j].getHeight()+5, true,color);
           std::string name= ((*states)[j].state().toStdString());
                glPrintString((*states)[j].getX(),(*states)[j].getY(), name);
 
-
-    }
+      }
+   }
   }
 
 //Drawing 50 rectangles with printing labels
@@ -200,4 +208,9 @@ void Canvas::renderRectangle(int x, int y, int width, double height, bool bounda
         glVertex2f(x,y);
         glEnd();
     }
+}
+
+void Canvas::drawActivate(bool activate)
+{
+    m_activate=activate;
 }

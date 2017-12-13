@@ -35,7 +35,9 @@ void MainInterfaceWindow::on_actionOpen_CSV_triggered()
 
         csvModel->insertRow(csvModel->rowCount(),real);
         ui->tableView->setModel(csvModel);
-        real.clear();
+//        ui->comboBox->addItem("Region");
+//        ui->comboBox->addItem("State");
+                real.clear();
 
      }
 
@@ -47,6 +49,7 @@ void MainInterfaceWindow::on_actionOpen_CSV_triggered()
 
     ui->openGLWidget->regions =m_dataRegion;
     ui->openGLWidget->states =m_dataState;
+    //QObject::connect(ui->comboBox, SIGNAL(currentIndexChanged(int)),StateCalculator,SLOT(activate(int)));
 
     ui->openGLWidget->update();
 }
@@ -57,3 +60,8 @@ void MainInterfaceWindow::setUpCharts(QList<dataTuple> *data)
 }
 
 
+void MainInterfaceWindow::on_checkBox_2_clicked(bool checked)
+{
+ ui->openGLWidget->drawActivate(checked);
+ ui->openGLWidget->update();
+}

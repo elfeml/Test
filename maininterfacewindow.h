@@ -34,9 +34,11 @@ public:
     explicit MainInterfaceWindow(QWidget *parent = 0);
     ~MainInterfaceWindow();
 
+
 private slots:
     void on_actionOpen_CSV_triggered();
 
+    void on_checkBox_2_clicked(bool checked);
 
 private:
     Ui::MainInterfaceWindow *ui;

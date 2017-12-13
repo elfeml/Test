@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -20,7 +21,6 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QOpenGLWidget>
-#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
@@ -43,7 +43,8 @@ public:
     QVBoxLayout *verticalLayout_2;
     QTableView *tableView;
     QFrame *frame_2;
-    QPushButton *pushButton;
+    QVBoxLayout *verticalLayout;
+    QCheckBox *checkBox_2;
     QTabWidget *tabWidget;
     QWidget *tab;
     QHBoxLayout *horizontalLayout_2;
@@ -85,12 +86,12 @@ public:
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         tableView = new QTableView(frame);
         tableView->setObjectName(QStringLiteral("tableView"));
-        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(tableView->sizePolicy().hasHeightForWidth());
         tableView->setSizePolicy(sizePolicy);
-        tableView->setMinimumSize(QSize(400, 600));
+        tableView->setMinimumSize(QSize(400, 700));
 
         verticalLayout_2->addWidget(tableView);
 
@@ -98,9 +99,15 @@ public:
         frame_2->setObjectName(QStringLiteral("frame_2"));
         frame_2->setFrameShape(QFrame::StyledPanel);
         frame_2->setFrameShadow(QFrame::Raised);
-        pushButton = new QPushButton(frame_2);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(20, -18, 341, 41));
+        verticalLayout = new QVBoxLayout(frame_2);
+        verticalLayout->setSpacing(6);
+        verticalLayout->setContentsMargins(11, 11, 11, 11);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        checkBox_2 = new QCheckBox(frame_2);
+        checkBox_2->setObjectName(QStringLiteral("checkBox_2"));
+
+        verticalLayout->addWidget(checkBox_2);
+
 
         verticalLayout_2->addWidget(frame_2);
 
@@ -184,7 +191,7 @@ public:
 
         retranslateUi(MainInterfaceWindow);
 
-        tabWidget->setCurrentIndex(3);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainInterfaceWindow);
@@ -194,7 +201,7 @@ public:
     {
         MainInterfaceWindow->setWindowTitle(QApplication::translate("MainInterfaceWindow", "MainInterfaceWindow", Q_NULLPTR));
         actionOpen_CSV->setText(QApplication::translate("MainInterfaceWindow", "Open CSV", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("MainInterfaceWindow", "PushButton", Q_NULLPTR));
+        checkBox_2->setText(QApplication::translate("MainInterfaceWindow", "Draw States", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainInterfaceWindow", "Chart", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainInterfaceWindow", "OpenGL", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainInterfaceWindow", "QTPaint", Q_NULLPTR));

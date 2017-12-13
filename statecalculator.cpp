@@ -1,21 +1,16 @@
 #include "statecalculator.h"
 
-
-
 StateCalculator::StateCalculator()
 {
-
 }
-
 
 void StateCalculator::identifyRegionRectangles(QList<dataTuple>* listofstates, QList<dataRegion>* regions)
 {
-
     int total=0;
 
     for(int i=0; i< regions->size(); ++i)
     {
-       total+=(*regions)[i].count();   
+       total+=(*regions)[i].count();
 
        qDebug()<< (*regions)[i].getRegion()<<(*regions)[i].count();
     }
@@ -36,7 +31,6 @@ void StateCalculator::identifyRegionRectangles(QList<dataTuple>* listofstates, Q
         else
         {
             width =(double) (regions->at(j).count()*multiplier) / total;
-
         }
 
       height = 95;
@@ -63,93 +57,60 @@ void StateCalculator::identifyRegionRectangles(QList<dataTuple>* listofstates, Q
       (*regions)[j].setHeight(height);
 
     }
-
 }
+//void StateCalculator::activate(int value)
+//{
+//    if(value==0)
+//    void StateCalculator::identifyStateRectangles(QList<dataTuple>* listofstates, QList<dataRegion>* regions, QList<dataState> *states);
+//    value=1;
+//}
 
 void StateCalculator::identifyStateRectangles(QList<dataTuple>* listofstates, QList<dataRegion>* regions, QList<dataState> *states)
 {
-//NOT FINISHED
-    int total=0;
+       int total=0;
 
-    for(int i=0; i< states->size(); ++i)
-    {
-       total+=(*states)[i].count();
-       qDebug()<< (*states)[i].state()<<(*states)[i].count();
-    }
-
-    double width, height, xValue, yValue;
-    yValue =95;
-    xValue = 1;
-    double multiplier;
-    double gap=1.5;
-    double regHeight=95;
-
-
-    for(int j=0; j < regions->size(); ++j)
-    {
-        multiplier=(regHeight-((double)regions->at(j).getNumberofStates()*gap))/(double)regions->at(j).count();
-        for(int k=0; k < states->size(); ++k)
+        for(int i=0; i< states->size(); ++i)
         {
-
-         if(QString::compare(states->at(k).getStateRegion(), regions->at(j).getRegion(), Qt::CaseInsensitive) == 0)
-          {
-             if((double)(states->at(k).count() == 0))
-             {
-                 height = 0.1;
-                 if((double)regions->at(j).getNumberofStates()==1)
-                     height=regions->at(j).getHeight();
-             }
-
-
-             else
-             {   //state rectangle height
-
-                 height =((double)(states->at(k).count()*multiplier));
-            }
-
-            width=regions->at(j).getWidth();
-            xValue=regions->at(j).getX();
-            (*states)[k].setX(xValue);
-            (*states)[k].setY(yValue);
-            (*states)[k].setWidth(width);
-            (*states)[k].setHeight(height);
-             yValue-=height+gap;
-          }
-        // height=(height-((double)regions->at(k).getNumberofStates()*gap))/(double)regions->at(k).count();
+            total+=(*states)[i].count();
+            qDebug()<< (*states)[i].state()<<(*states)[i].count();
         }
 
-         yValue=95;
+        double width, height, xValue, yValue;
+        yValue =95;
+        xValue = 1;
+        double multiplier;
+        double gap=1.5;
+        double regHeight=95;
 
+        for(int j=0; j < regions->size(); ++j)
+        {
+            multiplier=(regHeight-((double)regions->at(j).getNumberofStates()*gap))/(double)regions->at(j).count();
+            for(int k=0; k < states->size(); ++k)
+            {
+
+                if(QString::compare(states->at(k).getStateRegion(), regions->at(j).getRegion(), Qt::CaseInsensitive) == 0)
+                {
+                    if((double)(states->at(k).count() == 0))
+                    {
+                        height = 0.1;
+                        if((double)regions->at(j).getNumberofStates()==1)
+                            height=regions->at(j).getHeight();
+                    }
+                    else
+                    {   //state rectangle height
+                        height =((double)(states->at(k).count()*multiplier));
+                    }
+
+                    width=regions->at(j).getWidth();
+                    xValue=regions->at(j).getX();
+                    (*states)[k].setX(xValue);
+                    (*states)[k].setY(yValue);
+                    (*states)[k].setWidth(width);
+                    (*states)[k].setHeight(height);
+                    yValue-=height+gap;
+                }
+            }
+            yValue=95;
+       //}
     }
-
 }
-
-
-// These methods arent used
-int StateCalculator::calculateX(dataRegion data)
-{
-    int xValue;
-
-//  data->setX(xValue);
-    return xValue;
-}
-
-void StateCalculator::calculateY(dataRegion data)
-{
-    int yValue;
-
-//    data->setY(yValue);
-}
-void StateCalculator::calculateWidth(dataRegion data)
-{
-    int width;
-
-//    data->setWidth(width);
-}
-
-void StateCalculator::calculateHeigth(dataRegion data)
-  {
-    int height;
-
-//  data->setHeight(height);
-  }
