@@ -263,7 +263,7 @@ debug/moc_maininterfacewindow.cpp: C:/Qt/5.9.2/mingw53_32/include/QtWidgets/QMai
 		C:/Qt/5.9.2/mingw53_32/include/QtCore/QDebug \
 		rectangle.h \
 		dataregion.h \
-		dataState.h \
+		datastate.h \
 		filereader.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtCore/QFile \
 		statecalculator.h \
@@ -1458,7 +1458,7 @@ ui_maininterfacewindow.h: maininterfacewindow.ui \
 		datatuple.h \
 		rectangle.h \
 		dataregion.h \
-		dataState.h \
+		datastate.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/QWidget \
 		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/qwidget.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/qtwidgetsglobal.h \
@@ -1902,7 +1902,7 @@ debug/maininterfacewindow.o: maininterfacewindow.cpp maininterfacewindow.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtCore/QDebug \
 		rectangle.h \
 		dataregion.h \
-		dataState.h \
+		datastate.h \
 		filereader.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtCore/QFile \
 		statecalculator.h \
@@ -1966,6 +1966,10 @@ debug/maininterfacewindow.o: maininterfacewindow.cpp maininterfacewindow.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/qactiongroup.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/QButtonGroup \
 		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/qbuttongroup.h \
+		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/QCheckBox \
+		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/qcheckbox.h \
+		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/qabstractbutton.h \
+		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/QFrame \
 		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/QHBoxLayout \
 		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/qboxlayout.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/qlayout.h \
@@ -2009,6 +2013,7 @@ debug/maininterfacewindow.o: maininterfacewindow.cpp maininterfacewindow.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/qtableview.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/QToolBar \
 		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/qtoolbar.h \
+		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/QVBoxLayout \
 		barchartview.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/QGridLayout \
 		canvas.h \
@@ -2208,10 +2213,8 @@ debug/maininterfacewindow.o: maininterfacewindow.cpp maininterfacewindow.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtGui/qtguiversion.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/QtWidgets \
 		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/QtWidgetsDepends \
-		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/qabstractbutton.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/qaccessiblewidget.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/qcalendarwidget.h \
-		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/qcheckbox.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/qcolordialog.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/qdialog.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtWidgets/qcolormap.h \
@@ -2422,7 +2425,7 @@ debug/filereader.o: filereader.cpp filereader.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtCore/QDebug \
 		rectangle.h \
 		dataregion.h \
-		dataState.h \
+		datastate.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtCore/QFile
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\filereader.o filereader.cpp
 
@@ -2804,7 +2807,7 @@ debug/treemapifier.o: treemapifier.cpp maininterfacewindow.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtCore/QDebug \
 		rectangle.h \
 		dataregion.h \
-		dataState.h \
+		datastate.h \
 		filereader.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtCore/QFile \
 		statecalculator.h \
@@ -3338,7 +3341,7 @@ debug/canvas.o: canvas.cpp canvas.h \
 		datatuple.h \
 		rectangle.h \
 		dataregion.h \
-		dataState.h \
+		datastate.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtGui/QPainter \
 		C:/Qt/5.9.2/mingw53_32/include/QtGui/QPen \
 		C:/Qt/5.9.2/mingw53_32/include/QtGui/QFont
@@ -3777,7 +3780,7 @@ debug/statecalculator.o: statecalculator.cpp statecalculator.h \
 		C:/Qt/5.9.2/mingw53_32/include/QtGui/qcursor.h \
 		rectangle.h \
 		dataregion.h \
-		dataState.h
+		datastate.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\statecalculator.o statecalculator.cpp
 
 debug/dataregion.o: dataregion.cpp dataregion.h \

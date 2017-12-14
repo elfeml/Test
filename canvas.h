@@ -8,7 +8,7 @@
 #include "datatuple.h"
 #include <math.h>
 #include "dataregion.h"
-#include "dataState.h"
+#include "datastate.h"
 #include "QPointF"
 
 
