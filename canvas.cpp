@@ -9,6 +9,7 @@
 Canvas::Canvas(QWidget *parent) : QOpenGLWidget(parent)
 {
     qDebug() << "test";
+    setMouseTracking(true);
 }
 
 //set up
@@ -213,4 +214,88 @@ void Canvas::renderRectangle(int x, int y, int width, double height, bool bounda
 void Canvas::drawActivate(bool activate)
 {
     m_activate=activate;
+}
+
+void Canvas::full(bool full)
+{
+    m_full=full;
+}
+
+//void Canvas::mouseMoveEvent(QMouseEvent *event)
+//{
+//    qDebug() << event->pos();
+//}
+bool Canvas::event(QEvent * e)
+{
+    switch(e->type())
+    {
+    case QEvent::HoverEnter:
+        hoverEnter(static_cast<QHoverEvent*>(e));
+        return true;
+        break;
+    case QEvent::HoverLeave:
+        hoverLeave(static_cast<QHoverEvent*>(e));
+        return true;
+        break;
+    case QEvent::HoverMove:
+        hoverMove(static_cast<QHoverEvent*>(e));
+        return true;
+        break;
+    default:
+        break;
+    }
+    return QWidget::event(e);
+}
+
+void Canvas::hoverEnter(QHoverEvent * event)
+{
+    //qDebug() << Q_FUNC_INFO << event->type();
+}
+
+void Canvas::hoverLeave(QHoverEvent * event)
+{
+    //m_count = 0;
+    //qDebug() << Q_FUNC_INFO << event->type();
+   // this->setText(QString::number(m_count));
+}
+
+void Canvas::hoverMove(QHoverEvent * event)
+{
+
+    float posX=event->pos().x();
+    float posY=event->pos().y();
+
+  if(m_full){
+  for (int i = 0; i <states->size(); i++)
+   {
+       QPointF p = ConvertScreen(QPointF((*states)[i].getX(),(*states)[i].getY()));
+       QPointF plus = ConvertScreen(QPointF((*states)[i].getX()+(*states)[i].getWidth(),(*states)[i].getY()-(*states)[i].getHeight()));
+
+    if((p.x()<posX &&
+        p.y()<posY &&
+        plus.y()>posY&&
+        plus.x()>posX))
+    {
+        QString info= QString::number((*states)[i].count());
+        QString infoS=","+(*states)[i].state()+",";
+        QString dis="DIPHTHERIA";
+        infoS.append(dis);
+        info.append(infoS);
+
+//        QString i= QString::number((*states)[i].count(); // current file's number
+//        QString total=(*states)[i].state();       // number of files to process
+//        QString fileName="Hepatitis";    // current file's name
+
+//        QString info = QString("Processing file %1 of %2: %3")
+//                        .arg(i).arg(total).arg(fileName);
+
+
+        QPoint mousepos = QPoint(event->pos().x(), event->pos().y());
+        QToolTip::showText(this->mapToGlobal(mousepos),info);
+
+
+    }
+    //qDebug() << (event->pos().x())<<","<<(event->pos().y());
+   }
+  }
 }

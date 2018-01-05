@@ -74,3 +74,13 @@ void dataState::setHeight(double value)
 {
     height = value;
 }
+
+QString dataState::getAbb() const
+{
+    return m_abb;
+}
+
+void dataState::setAbb(const QString &abb)
+{
+    m_abb = abb;
+}

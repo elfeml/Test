@@ -3,6 +3,10 @@
 
 #endif // GLOBAL_H
 
-#include <QDebug>
+
 #include <QList>
 #include <QString>
+#include<QMouseEvent>
+#include<QEvent>
+#include <QDebug>
+

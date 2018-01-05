@@ -3,7 +3,6 @@
 
 Painter::Painter(QWidget *parent) : QWidget(parent)
 {
-
 }
 
 void Painter::MyWidget()

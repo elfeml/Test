@@ -31,10 +31,14 @@ public:
     double getHeight() const;
     void setHeight(double value);
 
+    QString getAbb() const;
+    void setAbb(const QString &abb);
+
 private:
     QString m_state;
     int m_count;
     QString m_stateRegion;
+    QString m_abb;
 
     int x;
     int y;

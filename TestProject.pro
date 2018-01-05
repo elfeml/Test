@@ -33,7 +33,9 @@ SOURCES += \
     rectangle.cpp \
     statecalculator.cpp \
     dataregion.cpp \
-    datastate.cpp
+    datastate.cpp \
+    dialog.cpp \
+    coordinate.cpp
 
 HEADERS += \
         maininterfacewindow.h \
@@ -46,7 +48,9 @@ HEADERS += \
     statecalculator.h \
     global.h \
     dataregion.h \
-    datastate.h
+    datastate.h \
+    dialog.h \
+    coordinate.h
 
 FORMS += \
         maininterfacewindow.ui

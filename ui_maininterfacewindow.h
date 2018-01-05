@@ -66,7 +66,7 @@ public:
     {
         if (MainInterfaceWindow->objectName().isEmpty())
             MainInterfaceWindow->setObjectName(QStringLiteral("MainInterfaceWindow"));
-        MainInterfaceWindow->resize(1080, 720);
+        MainInterfaceWindow->resize(1084, 732);
         MainInterfaceWindow->setMinimumSize(QSize(1080, 720));
         actionOpen_CSV = new QAction(MainInterfaceWindow);
         actionOpen_CSV->setObjectName(QStringLiteral("actionOpen_CSV"));
@@ -142,6 +142,7 @@ public:
         sizePolicy1.setHeightForWidth(openGLWidget->sizePolicy().hasHeightForWidth());
         openGLWidget->setSizePolicy(sizePolicy1);
         openGLWidget->setMinimumSize(QSize(200, 200));
+        openGLWidget->setMouseTracking(true);
 
         horizontalLayout->addWidget(openGLWidget);
 
@@ -175,7 +176,7 @@ public:
         MainInterfaceWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainInterfaceWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1080, 21));
+        menuBar->setGeometry(QRect(0, 0, 1084, 21));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         MainInterfaceWindow->setMenuBar(menuBar);

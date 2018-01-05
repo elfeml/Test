@@ -1,5 +1,5 @@
 #include "filereader.h"
-
+//QList<dataState> FileReader::m_listState;
 FileReader::FileReader(QString filename)
 {
     m_listTuple = new QList<dataTuple>();
