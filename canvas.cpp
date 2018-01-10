@@ -277,22 +277,13 @@ void Canvas::hoverMove(QHoverEvent * event)
         plus.x()>posX))
     {
         QString info= QString::number((*states)[i].count());
-        QString infoS=","+(*states)[i].state()+",";
+        QString infoS="\n"+(*states)[i].state()+"\n";
         QString dis="DIPHTHERIA";
         infoS.append(dis);
         info.append(infoS);
 
-//        QString i= QString::number((*states)[i].count(); // current file's number
-//        QString total=(*states)[i].state();       // number of files to process
-//        QString fileName="Hepatitis";    // current file's name
-
-//        QString info = QString("Processing file %1 of %2: %3")
-//                        .arg(i).arg(total).arg(fileName);
-
-
         QPoint mousepos = QPoint(event->pos().x(), event->pos().y());
         QToolTip::showText(this->mapToGlobal(mousepos),info);
-
 
     }
     //qDebug() << (event->pos().x())<<","<<(event->pos().y());
