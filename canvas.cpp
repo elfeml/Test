@@ -266,6 +266,7 @@ void Canvas::hoverMove(QHoverEvent * event)
     float posY=event->pos().y();
 
   if(m_full){
+  if(m_activate){
   for (int i = 0; i <states->size(); i++)
    {
        QPointF p = ConvertScreen(QPointF((*states)[i].getX(),(*states)[i].getY()));
@@ -288,5 +289,32 @@ void Canvas::hoverMove(QHoverEvent * event)
     }
     //qDebug() << (event->pos().x())<<","<<(event->pos().y());
    }
+  }
+  else{
+      for (int i = 0; i <regions->size(); i++)
+       {
+           QPointF p = ConvertScreen(QPointF((*regions)[i].getX(),(*regions)[i].getY()));
+           QPointF plus = ConvertScreen(QPointF((*regions)[i].getX()+(*regions)[i].getWidth(),(*regions)[i].getY()-(*regions)[i].getHeight()));
+
+        if((p.x()<posX &&
+            p.y()<posY &&
+            plus.y()>posY&&
+            plus.x()>posX))
+        {
+            QString info= QString::number((*regions)[i].count());
+            QString infoS="\n"+(*regions)[i].getRegion()+"\n";
+            QString dis="DIPHTHERIA";
+            infoS.append(dis);
+            info.append(infoS);
+
+            QPoint mousepos = QPoint(event->pos().x(), event->pos().y());
+            QToolTip::showText(this->mapToGlobal(mousepos),info);
+
+        }
+        //qDebug() << (event->pos().x())<<","<<(event->pos().y());
+       }
+
+
+  }
   }
 }
