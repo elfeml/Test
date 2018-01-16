@@ -34,7 +34,6 @@ SOURCES += \
     statecalculator.cpp \
     dataregion.cpp \
     datastate.cpp \
-    dialog.cpp \
     coordinate.cpp
 
 HEADERS += \

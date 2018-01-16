@@ -66,7 +66,7 @@ public:
     {
         if (MainInterfaceWindow->objectName().isEmpty())
             MainInterfaceWindow->setObjectName(QStringLiteral("MainInterfaceWindow"));
-        MainInterfaceWindow->resize(1084, 732);
+        MainInterfaceWindow->resize(1084, 751);
         MainInterfaceWindow->setMinimumSize(QSize(1080, 720));
         actionOpen_CSV = new QAction(MainInterfaceWindow);
         actionOpen_CSV->setObjectName(QStringLiteral("actionOpen_CSV"));

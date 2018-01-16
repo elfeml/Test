@@ -4,6 +4,9 @@
 #include <QPen>
 #include <QFont>
 #include <QPointF>
+#include <QColor>
+#include <QList>
+#include <QVector4D>
 
 
 Canvas::Canvas(QWidget *parent) : QOpenGLWidget(parent)
@@ -44,7 +47,7 @@ void Canvas::resizeGL(int w, int h)
 bool Canvas::prepareDraw()
 {
    glPointSize( 1 );
-   glOrtho(0,100,0,100,1,0);
+   glOrtho(0,105,0,100,1,0);
    glMatrixMode( GL_MODELVIEW );
    glLoadIdentity();
    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -73,7 +76,7 @@ void Canvas::glPrintString( float x, float y, std::string str )
     QPen pen;
     pen.setWidth(100);
     //Change pen colour
-    pen.setColor(Qt::red);
+    pen.setColor(Qt::black);
     //Assign painter the new pen.
     painter.setPen(pen);
 
@@ -110,37 +113,100 @@ QPointF Canvas::ConvertScreen(QPointF p)
     return returnVal;
 }
 
-//void Canvas::DrawActivate(){
+void Canvas::DrawLegend(){
 
+   double lRange =50; // Height of Color Legend
+   double slices = 7; // Total amount of colors
+   double slice = ( lRange / slices );
 
-//}
+   glLineWidth( 25 );
+
+   glBegin( GL_LINE_STRIP );
+
+   QList<QVector4D> colorList;
+
+        colorList.append(QVector4D(1.0f, 1.0f, 0.8f, 1.0f));
+        colorList.append(QVector4D(1.0f, 0.92f, 0.62f, 1.0f));
+        colorList.append(QVector4D(0.99f, 0.85f, 0.46f, 1.0f));
+        colorList.append(QVector4D(0.99f, 0.69f, 0.29f, 1.0f));
+        colorList.append(QVector4D(0.99f, 0.25f, 0.53f, 1.0f));
+        colorList.append(QVector4D(0.98f, 0.30f, 0.10f, 1.0f));
+        colorList.append(QVector4D(0.89f, 0.10f, 0.10f, 1.0f));
+        colorList.append(QVector4D(0.69f, 0.00f, 0.14f, 1.0f));
+
+   for ( int i = 0; i < slices; ++i )
+   {
+
+     QVector4D color = colorList.at(i);//Get next color
+
+     //glColor4f( 0, 0, 0, 1.0f );
+
+      glColor4f( color.x(), color.y(),color.z(),1.0f);
+
+      glVertex2f( 105, 25 + ( slice * ( i + 1.0 ) ) );
+   }
+   glEnd();
+}
 
 void Canvas::redraw()
 {
     prepareDraw();
+    DrawLegend();
     glColor3f(0,0,0);
 
-  //  renderRectangle(0,10,10,10,true);
-    int x = 18;
-    int y = 10;
-    int width = 10;
-    int height = 80;
-    int seperator = 3;
+
+//  renderRectangle(0,10,10,10,true);
+//    int x = 18;
+//    int y = 10;
+//    int width = 10;
+//    int height = 80;
+//    int seperator = 3;
     int a=1;
 
 
   for(int i =0; i<regions->size(); ++i)
   {
-      QVector4D color;
-//      color.setX(((0)) );
-//      color.setY(( (0)) );
-//      color.setZ(( (0)) );
-        color.setX(((double) rand() / (RAND_MAX)) );
-        color.setY(((double) rand() / (RAND_MAX)) );
-        color.setZ(((double) rand() / (RAND_MAX)) );
+      QVector4D stateColor;
+// Random Colors
+//        color.setX(((double) rand() / (RAND_MAX)) );
+//        color.setY(((double) rand() / (RAND_MAX)) );
+//        color.setZ(((double) rand() / (RAND_MAX)) );
+
+      if(regions->at(i).count()<100){
+                      stateColor.setX(( (1.0f)) );
+                      stateColor.setY(( (1.0f)) );
+                      stateColor.setZ(( (0.8f)) ); }
+      else if (regions->at(i).count()<200){
+                      stateColor.setX(( (1.0f)) );
+                      stateColor.setY(( (0.92f)) );
+                      stateColor.setZ(( (0.62f)) );}
+      else if (regions->at(i).count()<300){
+                      stateColor.setX(( (0.99f)) );
+                      stateColor.setY(( (0.85f)) );
+                      stateColor.setZ(( (0.46f)) );}
+      else if(regions->at(i).count()<400){
+                      stateColor.setX(( (0.99f)) );
+                      stateColor.setY(( (0.69f)) );
+                      stateColor.setZ(( (0.29f)) );}
+      else if(regions->at(i).count()<500){
+                      stateColor.setX(( (0.99f)) );
+                      stateColor.setY(( (0.55f)) );
+                      stateColor.setZ(( (0.23f)) );}
+      else if(regions->at(i).count()<600){
+                      stateColor.setX(( (0.98f)) );
+                      stateColor.setY(( (0.30f)) );
+                      stateColor.setZ(( (0.16f)) );}
+      else if(regions->at(i).count()<700){
+                      stateColor.setX(( (0.89f)) );
+                      stateColor.setY(( (0.10f)) );
+                      stateColor.setZ(( (0.10f)) );}
+      else{
+                      stateColor.setX(( (0.69f)) );
+                      stateColor.setY(( (0.00f)) );
+                      stateColor.setZ(( (0.14f)) );}
 
       renderRectangle((*regions)[i].getX(), (*regions)[i].getY(), (*regions)[i].getWidth(),
-                      (*regions)[i].getHeight(), true,color);
+                      (*regions)[i].getHeight(), true,stateColor);
       std::string name= ((*regions)[i].getRegion().toStdString());
            glPrintString((*regions)[i].getX(),(*regions)[i].getY()+a, name);
 
@@ -149,23 +215,56 @@ void Canvas::redraw()
 
      for (int j =0; j<states->size(); ++j)
       {
-            QVector4D color;
-//          stateColor.setX(0.0f );
-//          stateColor.setY(0.0f);
-//          stateColor.setZ(0.0f);
-//          stateColor.setW(1.0f);
-          color.setX(((double) rand() / (RAND_MAX)) );
-          color.setY(((double) rand() / (RAND_MAX)) );
-          color.setZ(((double) rand() / (RAND_MAX)) );
+          QVector4D stateColor;
+// Random Colors
+//          color.setX(((double) rand() / (RAND_MAX)) );
+//          color.setY(((double) rand() / (RAND_MAX)) );
+//          color.setZ(((double) rand() / (RAND_MAX)) );
+
+          if(states->at(j).count()<10){
+                          stateColor.setX(( (1.0f)) );
+                          stateColor.setY(( (1.0f)) );
+                          stateColor.setZ(( (0.8f)) );
+                          }
+          else if (states->at(j).count()<25){
+                          stateColor.setX(( (1.0f)) );
+                          stateColor.setY(( (0.92f)) );
+                          stateColor.setZ(( (0.62f)) );}
+          else if (states->at(j).count()<55){
+                          stateColor.setX(( (0.99f)) );
+                          stateColor.setY(( (0.85f)) );
+                          stateColor.setZ(( (0.46f)) );}
+          else if(states->at(j).count()<100){
+                          stateColor.setX(( (0.99f)) );
+                          stateColor.setY(( (0.69f)) );
+                          stateColor.setZ(( (0.29f)) );}
+          else if(states->at(j).count()<160){
+                          stateColor.setX(( (0.99f)) );
+                          stateColor.setY(( (0.55f)) );
+                          stateColor.setZ(( (0.23f)) );}
+          else if(states->at(j).count()<180){
+                          stateColor.setX(( (0.98f)) );
+                          stateColor.setY(( (0.30f)) );
+                          stateColor.setZ(( (0.16f)) );}
+          else if(states->at(j).count()<210){
+                          stateColor.setX(( (0.89f)) );
+                          stateColor.setY(( (0.10f)) );
+                          stateColor.setZ(( (0.10f)) );}
+          else{
+                          stateColor.setX(( (0.69f)) );
+                          stateColor.setY(( (0.00f)) );
+                          stateColor.setZ(( (0.14f)) );}
 
           renderRectangle((*states)[j].getX(), (*states)[j].getY(), (*states)[j].getWidth(),
-                          (*states)[j].getHeight()+5, true,color);
+                          (*states)[j].getHeight()+5, true,stateColor);
           std::string name= ((*states)[j].state().toStdString());
                glPrintString((*states)[j].getX(),(*states)[j].getY(), name);
 
       }
    }
   }
+
+
 
 //Drawing 50 rectangles with printing labels
 //   for(int i =0; i < listofStates->size(); ++i)
@@ -184,7 +283,6 @@ void Canvas::redraw()
 //    }
 
 }
-
 
 void Canvas::renderRectangle(int x, int y, int width, double height, bool boundary,QVector4D color)
 {

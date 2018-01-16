@@ -10,7 +10,6 @@ INPUT(
 ./release\statecalculator.o
 ./release\dataregion.o
 ./release\datastate.o
-./release\dialog.o
 ./release\coordinate.o
 ./release\qrc_data.o
 ./release\moc_maininterfacewindow.o

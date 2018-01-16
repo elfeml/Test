@@ -30,6 +30,8 @@ public:
          QList<dataState>* states = nullptr;
          void drawActivate(bool activate);
          void full(bool full);
+         void DrawLegend();
+         QList<QVector4D>*colorList;
 
 protected:
     bool event(QEvent * e);
