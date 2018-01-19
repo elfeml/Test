@@ -96,7 +96,7 @@ QPointF Canvas::ConvertScreen(QPointF p)
     float maxX = width();
     float maxY = height();
 
-    float maxX2 = 100;
+    float maxX2 = 105;
     float maxY2 = 100;
 
     float xRatio = p.x()/maxX2;
@@ -212,7 +212,7 @@ void Canvas::redraw()
 
 
    if(m_activate){
-
+   int b =10; int c=25; int d=55;
      for (int j =0; j<states->size(); ++j)
       {
           QVector4D stateColor;
