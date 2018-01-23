@@ -29,9 +29,13 @@ public:
          QList<dataRegion>* regions = nullptr;
          QList<dataState>* states = nullptr;
          void drawActivate(bool activate);
+         void StepActivate(bool stepActivate);
          void full(bool full);
          void DrawLegend();
          QList<QVector4D>*colorList;
+         int m_StepCount=0;
+         int m_StepCountState=-5;
+
 
 protected:
     bool event(QEvent * e);
@@ -43,9 +47,12 @@ private:
     bool prepareDraw();
     void glPrint( void* font, const char* str );
     void glPrintString( float x, float y, std::string str );
+    QVector4D colorScaleRegion(int a);
+    QVector4D colorScaleState(int a);
     QPointF ConvertScreen(QPointF p);
     bool m_activate =false;
     bool m_full=false;
+    bool m_stepActivate=false;
 
 
 };

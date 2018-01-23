@@ -11,7 +11,6 @@
 
 Canvas::Canvas(QWidget *parent) : QOpenGLWidget(parent)
 {
-    qDebug() << "test";
     setMouseTracking(true);
 }
 
@@ -113,6 +112,90 @@ QPointF Canvas::ConvertScreen(QPointF p)
     return returnVal;
 }
 
+QVector4D Canvas::colorScaleRegion(int a){
+    int z=100; int m=200; int n =300; int o=400; int l=500; int s=600; int p =700;
+
+       QVector4D stateColor;
+
+       if(a<z){
+                       stateColor.setX(( (1.0f)) );
+                       stateColor.setY(( (1.0f)) );
+                       stateColor.setZ(( (0.8f)) ); }
+       else if (a<m){
+                       stateColor.setX(( (1.0f)) );
+                       stateColor.setY(( (0.92f)) );
+                       stateColor.setZ(( (0.62f)) );}
+       else if (a<n){
+                       stateColor.setX(( (0.99f)) );
+                       stateColor.setY(( (0.85f)) );
+                       stateColor.setZ(( (0.46f)) );}
+      else if (a<o){
+                       stateColor.setX(( (0.99f)) );
+                       stateColor.setY(( (0.69f)) );
+                       stateColor.setZ(( (0.29f)) );}
+       else if (a<l){
+                       stateColor.setX(( (0.99f)) );
+                       stateColor.setY(( (0.55f)) );
+                       stateColor.setZ(( (0.23f)) );}
+       else if (a<s){
+                       stateColor.setX(( (0.98f)) );
+                       stateColor.setY(( (0.30f)) );
+                       stateColor.setZ(( (0.16f)) );}
+       else if (a<p){
+                       stateColor.setX(( (0.89f)) );
+                       stateColor.setY(( (0.10f)) );
+                       stateColor.setZ(( (0.10f)) );}
+       else{
+                       stateColor.setX(( (0.69f)) );
+                       stateColor.setY(( (0.00f)) );
+                       stateColor.setZ(( (0.14f)) );}
+
+       return stateColor;
+
+}
+
+QVector4D Canvas::colorScaleState(int a){
+
+  int b =10; int c=25; int d=55; int e=100; int f=160; int g=180; int h=210;
+       QVector4D stateColor;
+
+       if(a<b){
+                       stateColor.setX(( (1.0f)) );
+                       stateColor.setY(( (1.0f)) );
+                       stateColor.setZ(( (0.8f)) ); }
+       else if (a<c){
+                       stateColor.setX(( (1.0f)) );
+                       stateColor.setY(( (0.92f)) );
+                       stateColor.setZ(( (0.62f)) );}
+       else if (a<d){
+                       stateColor.setX(( (0.99f)) );
+                       stateColor.setY(( (0.85f)) );
+                       stateColor.setZ(( (0.46f)) );}
+      else if (a<e){
+                       stateColor.setX(( (0.99f)) );
+                       stateColor.setY(( (0.69f)) );
+                       stateColor.setZ(( (0.29f)) );}
+       else if (a<f){
+                       stateColor.setX(( (0.99f)) );
+                       stateColor.setY(( (0.55f)) );
+                       stateColor.setZ(( (0.23f)) );}
+       else if (a<g){
+                       stateColor.setX(( (0.98f)) );
+                       stateColor.setY(( (0.30f)) );
+                       stateColor.setZ(( (0.16f)) );}
+       else if (a<h){
+                       stateColor.setX(( (0.89f)) );
+                       stateColor.setY(( (0.10f)) );
+                       stateColor.setZ(( (0.10f)) );}
+       else{
+                       stateColor.setX(( (0.69f)) );
+                       stateColor.setY(( (0.00f)) );
+                       stateColor.setZ(( (0.14f)) );}
+
+       return stateColor;
+
+}
+// Color Legend
 void Canvas::DrawLegend(){
 
    double lRange =50; // Height of Color Legend
@@ -139,7 +222,7 @@ void Canvas::DrawLegend(){
 
      QVector4D color = colorList.at(i);//Get next color
 
-     //glColor4f( 0, 0, 0, 1.0f );
+     //glColor4f( 0, 0, 0, 1.0f ); //black
 
       glColor4f( color.x(), color.y(),color.z(),1.0f);
 
@@ -148,122 +231,47 @@ void Canvas::DrawLegend(){
    glEnd();
 }
 
+
 void Canvas::redraw()
 {
     prepareDraw();
     DrawLegend();
     glColor3f(0,0,0);
 
-
-//  renderRectangle(0,10,10,10,true);
-//    int x = 18;
-//    int y = 10;
-//    int width = 10;
-//    int height = 80;
-//    int seperator = 3;
-    int a=1;
+    int a=1; int k=5;
 
 
   for(int i =0; i<regions->size(); ++i)
   {
-      QVector4D stateColor;
-// Random Colors
-//        color.setX(((double) rand() / (RAND_MAX)) );
-//        color.setY(((double) rand() / (RAND_MAX)) );
-//        color.setZ(((double) rand() / (RAND_MAX)) );
+   QVector4D stateColor = colorScaleRegion(regions->at(i).count());
 
-      if(regions->at(i).count()<100){
-                      stateColor.setX(( (1.0f)) );
-                      stateColor.setY(( (1.0f)) );
-                      stateColor.setZ(( (0.8f)) ); }
-      else if (regions->at(i).count()<200){
-                      stateColor.setX(( (1.0f)) );
-                      stateColor.setY(( (0.92f)) );
-                      stateColor.setZ(( (0.62f)) );}
-      else if (regions->at(i).count()<300){
-                      stateColor.setX(( (0.99f)) );
-                      stateColor.setY(( (0.85f)) );
-                      stateColor.setZ(( (0.46f)) );}
-      else if(regions->at(i).count()<400){
-                      stateColor.setX(( (0.99f)) );
-                      stateColor.setY(( (0.69f)) );
-                      stateColor.setZ(( (0.29f)) );}
-      else if(regions->at(i).count()<500){
-                      stateColor.setX(( (0.99f)) );
-                      stateColor.setY(( (0.55f)) );
-                      stateColor.setZ(( (0.23f)) );}
-      else if(regions->at(i).count()<600){
-                      stateColor.setX(( (0.98f)) );
-                      stateColor.setY(( (0.30f)) );
-                      stateColor.setZ(( (0.16f)) );}
-      else if(regions->at(i).count()<700){
-                      stateColor.setX(( (0.89f)) );
-                      stateColor.setY(( (0.10f)) );
-                      stateColor.setZ(( (0.10f)) );}
-      else{
-                      stateColor.setX(( (0.69f)) );
-                      stateColor.setY(( (0.00f)) );
-                      stateColor.setZ(( (0.14f)) );}
-
+   if(m_StepCount>i)
+       {
+    //  qDebug()<<"test"<<i<<regions->size();
       renderRectangle((*regions)[i].getX(), (*regions)[i].getY(), (*regions)[i].getWidth(),
                       (*regions)[i].getHeight(), true,stateColor);
       std::string name= ((*regions)[i].getRegion().toStdString());
            glPrintString((*regions)[i].getX(),(*regions)[i].getY()+a, name);
+        }
 
 
    if(m_activate){
-   int b =10; int c=25; int d=55;
-     for (int j =0; j<states->size(); ++j)
+
+    for (int j =0; j<states->size(); ++j)
       {
-          QVector4D stateColor;
-// Random Colors
-//          color.setX(((double) rand() / (RAND_MAX)) );
-//          color.setY(((double) rand() / (RAND_MAX)) );
-//          color.setZ(((double) rand() / (RAND_MAX)) );
+       QVector4D stateColor = colorScaleState(states->at(j).count());
 
-          if(states->at(j).count()<10){
-                          stateColor.setX(( (1.0f)) );
-                          stateColor.setY(( (1.0f)) );
-                          stateColor.setZ(( (0.8f)) );
-                          }
-          else if (states->at(j).count()<25){
-                          stateColor.setX(( (1.0f)) );
-                          stateColor.setY(( (0.92f)) );
-                          stateColor.setZ(( (0.62f)) );}
-          else if (states->at(j).count()<55){
-                          stateColor.setX(( (0.99f)) );
-                          stateColor.setY(( (0.85f)) );
-                          stateColor.setZ(( (0.46f)) );}
-          else if(states->at(j).count()<100){
-                          stateColor.setX(( (0.99f)) );
-                          stateColor.setY(( (0.69f)) );
-                          stateColor.setZ(( (0.29f)) );}
-          else if(states->at(j).count()<160){
-                          stateColor.setX(( (0.99f)) );
-                          stateColor.setY(( (0.55f)) );
-                          stateColor.setZ(( (0.23f)) );}
-          else if(states->at(j).count()<180){
-                          stateColor.setX(( (0.98f)) );
-                          stateColor.setY(( (0.30f)) );
-                          stateColor.setZ(( (0.16f)) );}
-          else if(states->at(j).count()<210){
-                          stateColor.setX(( (0.89f)) );
-                          stateColor.setY(( (0.10f)) );
-                          stateColor.setZ(( (0.10f)) );}
-          else{
-                          stateColor.setX(( (0.69f)) );
-                          stateColor.setY(( (0.00f)) );
-                          stateColor.setZ(( (0.14f)) );}
-
+        if(m_StepCountState>j)
+        {
+         qDebug()<<"test"<<i<<states->size();
           renderRectangle((*states)[j].getX(), (*states)[j].getY(), (*states)[j].getWidth(),
-                          (*states)[j].getHeight()+5, true,stateColor);
+                          (*states)[j].getHeight()+k, true,stateColor);
           std::string name= ((*states)[j].state().toStdString());
                glPrintString((*states)[j].getX(),(*states)[j].getY(), name);
-
-      }
+        }
+     }
    }
   }
-
 
 
 //Drawing 50 rectangles with printing labels
@@ -314,15 +322,17 @@ void Canvas::drawActivate(bool activate)
     m_activate=activate;
 }
 
+void Canvas::StepActivate(bool stepActivate)
+{
+    m_stepActivate=stepActivate;
+}
+
 void Canvas::full(bool full)
 {
     m_full=full;
 }
 
-//void Canvas::mouseMoveEvent(QMouseEvent *event)
-//{
-//    qDebug() << event->pos();
-//}
+// Mouse Over
 bool Canvas::event(QEvent * e)
 {
     switch(e->type())
@@ -410,9 +420,7 @@ void Canvas::hoverMove(QHoverEvent * event)
 
         }
         //qDebug() << (event->pos().x())<<","<<(event->pos().y());
-       }
-
-
+       }      
   }
   }
 }

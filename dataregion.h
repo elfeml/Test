@@ -33,13 +33,14 @@ public:
 
 private:
     QString m_region;
-    int m_count;
-    int m_numberofStates=1;
+    int m_count=0;
+    int m_numberofStates=0;
 
     int x;
     int y;
     int width;
     int height;
+
 };
 
 #endif // DATAREGION_H

@@ -40,16 +40,14 @@ public:
     ~MainInterfaceWindow();
 
 
-
 private slots:
     void on_actionOpen_CSV_triggered();
     void on_checkBox_2_clicked(bool checked);
-   // void mouseMoveEvent(QMouseEvent *event) override; //pressed
-//protected:
-//    bool event(QEvent * e);
-//    void hoverEnter(QHoverEvent * event);
-//    void hoverLeave(QHoverEvent * event);
-//    void hoverMove(QHoverEvent * event);
+    void on_stepFunction_clicked();
+
+    void on_finishLayout_clicked();
+
+    void on_reset_clicked();
 
 private:
     Ui::MainInterfaceWindow *ui;

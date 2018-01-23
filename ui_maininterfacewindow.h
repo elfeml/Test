@@ -21,6 +21,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QOpenGLWidget>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
@@ -44,6 +45,9 @@ public:
     QTableView *tableView;
     QFrame *frame_2;
     QVBoxLayout *verticalLayout;
+    QPushButton *stepFunction;
+    QPushButton *finishLayout;
+    QPushButton *reset;
     QCheckBox *checkBox_2;
     QTabWidget *tabWidget;
     QWidget *tab;
@@ -103,6 +107,21 @@ public:
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        stepFunction = new QPushButton(frame_2);
+        stepFunction->setObjectName(QStringLiteral("stepFunction"));
+
+        verticalLayout->addWidget(stepFunction);
+
+        finishLayout = new QPushButton(frame_2);
+        finishLayout->setObjectName(QStringLiteral("finishLayout"));
+
+        verticalLayout->addWidget(finishLayout);
+
+        reset = new QPushButton(frame_2);
+        reset->setObjectName(QStringLiteral("reset"));
+
+        verticalLayout->addWidget(reset);
+
         checkBox_2 = new QCheckBox(frame_2);
         checkBox_2->setObjectName(QStringLiteral("checkBox_2"));
 
@@ -202,6 +221,9 @@ public:
     {
         MainInterfaceWindow->setWindowTitle(QApplication::translate("MainInterfaceWindow", "MainInterfaceWindow", Q_NULLPTR));
         actionOpen_CSV->setText(QApplication::translate("MainInterfaceWindow", "Open CSV", Q_NULLPTR));
+        stepFunction->setText(QApplication::translate("MainInterfaceWindow", "Step Function", Q_NULLPTR));
+        finishLayout->setText(QApplication::translate("MainInterfaceWindow", "Finish Layout", Q_NULLPTR));
+        reset->setText(QApplication::translate("MainInterfaceWindow", "Reset", Q_NULLPTR));
         checkBox_2->setText(QApplication::translate("MainInterfaceWindow", "Draw States", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainInterfaceWindow", "Chart", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainInterfaceWindow", "OpenGL", Q_NULLPTR));

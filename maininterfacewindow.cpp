@@ -44,14 +44,12 @@ void MainInterfaceWindow::on_actionOpen_CSV_triggered()
 //        ui->comboBox->addItem("Region");
 //        ui->comboBox->addItem("State");
                 real.clear();
-
-     }
+ }
 
     setUpCharts(m_dataTuple); // show m_datatuple on Chart Widget
 
     StateCalculator::identifyRegionRectangles(m_dataTuple, m_dataRegion);
     StateCalculator::identifyStateRectangles(m_dataTuple, m_dataRegion,m_dataState);
-
 
     ui->openGLWidget->regions =m_dataRegion;
     ui->openGLWidget->states =m_dataState;
@@ -65,89 +63,32 @@ void MainInterfaceWindow::setUpCharts(QList<dataTuple> *data)
    ui->chartWidget->display(data); // m_dataTuple as data,display method is defined to be applied example
 }
 
-
 void MainInterfaceWindow::on_checkBox_2_clicked(bool checked)
 {
  ui->openGLWidget->drawActivate(checked);
  ui->openGLWidget->update();
 }
 
-//Pressed
-//void MainInterfaceWindow::mouseMoveEvent(QMouseEvent *event)
-//{
-//    if (event->button() == Qt::LeftButton)
-//        {
-//            // handle left mouse button here
-//        } else {
-//            // pass on other buttons to base class
-//            MainInterfaceWindow::mousePressEvent(event);
-//        }
 
-//    qDebug() << "inside move";
-//    qDebug() << (event->pos().x())<<","<<(event->pos().y());
-//}
+void MainInterfaceWindow::on_stepFunction_clicked()
+{
+    ui->openGLWidget->m_StepCount++;
+    ui->openGLWidget->StepActivate(true);
+    ui->openGLWidget->m_StepCountState++;
+    ui->openGLWidget->update();
 
+}
 
-//bool MainInterfaceWindow::event(QEvent * e)
-//{
-//    switch(e->type())
-//    {
-//    case QEvent::HoverEnter:
-//        hoverEnter(static_cast<QHoverEvent*>(e));
-//        return true;
-//        break;
-//    case QEvent::HoverLeave:
-//        hoverLeave(static_cast<QHoverEvent*>(e));
-//        return true;
-//        break;
-//    case QEvent::HoverMove:
-//        hoverMove(static_cast<QHoverEvent*>(e));
-//        return true;
-//        break;
-//    default:
-//        break;
-//    }
-//    return QWidget::event(e);
-//}
+void MainInterfaceWindow::on_finishLayout_clicked()
+{
+    ui->openGLWidget->m_StepCount=5;
+    ui->openGLWidget->m_StepCountState=50;
+    ui->openGLWidget->update();
+}
 
-//void MainInterfaceWindow::hoverEnter(QHoverEvent * event)
-//{
-//    //qDebug() << Q_FUNC_INFO << event->type();
-//}
-
-//void MainInterfaceWindow::hoverLeave(QHoverEvent * event)
-//{
-//    //m_count = 0;
-//    //qDebug() << Q_FUNC_INFO << event->type();
-//   // this->setText(QString::number(m_count));
-//}
-
-//void MainInterfaceWindow::hoverMove(QHoverEvent * event)
-//{
-//    float posX=event->pos().x();
-//    float posY=event->pos().y();
-
-
-
-
-//    if(m_full){
-//    for (int i = 0; i <m_dataState->size(); i++)
-//   {
-//    if(((*m_dataState)[i].getX()<posX &&
-//        (*m_dataState)[i].getY()<posY &&
-//        (*m_dataState)[i].getY()+(*m_dataState)[i].getHeight()>posY&&
-//        (*m_dataState)[i].getX()+(*m_dataState)[i].getWidth()>posX))
-//    {
-
-//       QToolTip::showText(event->pos(),(*m_dataState)[i].state());
-
-//    }
-////    else
-////    {
-////        //QToolTip::hideText();
-////    }
-
-//    //qDebug() << (event->pos().x())<<","<<(event->pos().y());
-//   }
-//  }
-//}
+void MainInterfaceWindow::on_reset_clicked()
+{
+    ui->openGLWidget->m_StepCount=-1;
+    ui->openGLWidget->m_StepCountState=-5;
+    ui->openGLWidget->update();
+}

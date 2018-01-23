@@ -5,6 +5,17 @@ FileReader::FileReader(QString filename)
     m_listTuple = new QList<dataTuple>();
     m_listRegion= new QList<dataRegion>();
     m_listState= new QList<dataState>();
+    dataRegion initRegion;
+    initRegion.setRegion("West");
+     m_listRegion->append(initRegion);
+     initRegion.setRegion("Southwest");
+      m_listRegion->append(initRegion);
+     initRegion.setRegion("Midwest");
+      m_listRegion->append(initRegion);
+     initRegion.setRegion("Southeast");
+      m_listRegion->append(initRegion);
+     initRegion.setRegion("Northeast");
+      m_listRegion->append(initRegion);
 
     QFile file(filename);
     if ( file.open(QFile::ReadOnly | QFile::Text) ) {
@@ -61,22 +72,22 @@ FileReader::FileReader(QString filename)
                    m_listState->append(stateobj);
                 }
 //REGION LIST
-             for(int k = 0; k < m_listRegion->size(); ++k)
-                {
+                for(int k = 0; k < m_listRegion->size(); ++k)
+                   {
                     int value = QString::compare(tuple.getRegionName(), (*m_listRegion)[k].getRegion(), Qt::CaseInsensitive);
-                    if (value == 0)
-                    {
-                        uniqueRegion = false;
-                        (*m_listRegion)[k].setCount((*m_listRegion)[k].count() + regionobj.count());//update count
-                        (*m_listRegion)[k].addState();
-                    }
-                }
-                if (uniqueRegion)
-                {
-                    m_listRegion->append(regionobj);
-                }
- /*end*/     if(!in)
-                {
+                       if (value == 0)
+                       {
+                           uniqueRegion = false;
+                           (*m_listRegion)[k].setCount((*m_listRegion)[k].count() + regionobj.count());//update count
+                           (*m_listRegion)[k].addState();
+                       }
+                   }
+                   if (uniqueRegion)
+                   {
+                      m_listRegion->append(regionobj);
+                   }
+    /*end*/     if(!in)
+                   {
                      m_listTuple->append(tuple);// m_listTuple stores each item in StringList
                 }
             }
