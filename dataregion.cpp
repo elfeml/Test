@@ -12,6 +12,11 @@ int dataRegion::count() const
 
 void dataRegion::setCount(int count)
 {
+    if(count==0)
+    {
+        count=0.5;
+    }
+
     m_count = count;
 }
 
@@ -45,12 +50,12 @@ void dataRegion::setWidth(int value)
     width = value;
 }
 
-int dataRegion::getHeight() const
+float dataRegion::getHeight() const
 {
     return height;
 }
 
-void dataRegion::setHeight(int value)
+void dataRegion::setHeight(float value)
 {
     height = value;
 }

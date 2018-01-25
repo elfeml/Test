@@ -22,25 +22,29 @@ int dataState::count() const
 
 void dataState::setCount(int count)
 {
+    if(count==0)
+        {
+            count=0.5;
+        }
     m_count = count;
 }
 
-int dataState::getX() const
+float dataState::getX() const
 {
     return x;
 }
 
-void dataState::setX(int value)
+void dataState::setX(float value)
 {
     x = value;
 }
 
-int dataState::getY() const
+float dataState::getY() const
 {
     return y;
 }
 
-void dataState::setY(int value)
+void dataState::setY(float value)
 {
     y = value;
 }

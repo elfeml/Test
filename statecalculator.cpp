@@ -76,15 +76,16 @@ void StateCalculator::identifyStateRectangles(QList<dataTuple>* listofstates, QL
         }
 
         double width, height, xValue, yValue;
-        yValue =95;
+        double gap=1;
+        yValue =95-gap;
         xValue = 1;
         double multiplier;
-        double gap=1.5;
         double regHeight=95;
 
         for(int j=0; j < regions->size(); ++j)
         {
-            multiplier=(regHeight-((double)regions->at(j).getNumberofStates()*gap))/(double)regions->at(j).count();
+            multiplier=(regHeight-gap-((double)regions->at(j).getNumberofStates()*gap))/(double)regions->at(j).count();
+
             for(int k=0; k < states->size(); ++k)
             {
 
@@ -93,8 +94,9 @@ void StateCalculator::identifyStateRectangles(QList<dataTuple>* listofstates, QL
                     if((double)(states->at(k).count() == 0))
                     {
                         height = 0.1;
+
                         if((double)regions->at(j).getNumberofStates()==1)
-                            height=regions->at(j).getHeight();
+                            height=regions->at(j).getHeight()-2*gap;
                     }
                     else
                     {   //state rectangle height
@@ -109,8 +111,9 @@ void StateCalculator::identifyStateRectangles(QList<dataTuple>* listofstates, QL
                     (*states)[k].setHeight(height);
                     yValue-=height+gap;
                 }
+
             }
-            yValue=95;
+            yValue=95-gap;
        //}
     }
 }

@@ -239,17 +239,19 @@ void Canvas::redraw()
     glColor3f(0,0,0);
 
     int a=1; int k=5;
+    int drawState=0;
 
 
   for(int i =0; i<regions->size(); ++i)
   {
-   QVector4D stateColor = colorScaleRegion(regions->at(i).count());
+      QVector4D stateColor = colorScaleRegion(regions->at(i).count());
 
    if(m_StepCount>i)
-       {
-    //  qDebug()<<"test"<<i<<regions->size();
+       { 
+
       renderRectangle((*regions)[i].getX(), (*regions)[i].getY(), (*regions)[i].getWidth(),
                       (*regions)[i].getHeight(), true,stateColor);
+
       std::string name= ((*regions)[i].getRegion().toStdString());
            glPrintString((*regions)[i].getX(),(*regions)[i].getY()+a, name);
         }
@@ -257,21 +259,28 @@ void Canvas::redraw()
 
    if(m_activate){
 
-    for (int j =0; j<states->size(); ++j)
+      for (int j =0; j<states->size(); ++j)
       {
-       QVector4D stateColor = colorScaleState(states->at(j).count());
+       QString stateName=(*states)[j].getStateRegion();
+       QString regionName=(*regions)[i].getRegion();
 
-        if(m_StepCountState>j)
+        if(stateName==regionName)
         {
-         qDebug()<<"test"<<i<<states->size();
-          renderRectangle((*states)[j].getX(), (*states)[j].getY(), (*states)[j].getWidth(),
-                          (*states)[j].getHeight()+k, true,stateColor);
+
+         QVector4D stateColor = colorScaleState(states->at(j).count());
+
+          if(m_StepCountState>drawState)
+           {
+          renderRectangle((*states)[j].getX()+0.5, (*states)[j].getY(), (*states)[j].getWidth()-1,
+                          (*states)[j].getHeight(), true,stateColor);
           std::string name= ((*states)[j].state().toStdString());
                glPrintString((*states)[j].getX(),(*states)[j].getY(), name);
+               drawState++;
+           }
         }
-     }
+       }
    }
-  }
+}
 
 
 //Drawing 50 rectangles with printing labels
@@ -292,7 +301,7 @@ void Canvas::redraw()
 
 }
 
-void Canvas::renderRectangle(int x, int y, int width, double height, bool boundary,QVector4D color)
+void Canvas::renderRectangle(float x, float y, float width, double height, bool boundary,QVector4D color)
 {
     glColor4f(1,0,0,1); //255/255
     glColor4f(color.x(),color.y(),color.z(),1);

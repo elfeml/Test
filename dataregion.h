@@ -22,8 +22,8 @@ public:
     int getWidth() const;
     void setWidth(int value);
 
-    int getHeight() const;
-    void setHeight(int value);
+    float getHeight() const;
+    void setHeight(float value);
 
     QString getRegion() const;
     void setRegion(const QString &region);
@@ -39,7 +39,7 @@ private:
     int x;
     int y;
     int width;
-    int height;
+    float height;
 
 };
 

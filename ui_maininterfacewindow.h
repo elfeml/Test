@@ -90,12 +90,12 @@ public:
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         tableView = new QTableView(frame);
         tableView->setObjectName(QStringLiteral("tableView"));
-        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(tableView->sizePolicy().hasHeightForWidth());
         tableView->setSizePolicy(sizePolicy);
-        tableView->setMinimumSize(QSize(400, 700));
+        tableView->setMinimumSize(QSize(400, 400));
 
         verticalLayout_2->addWidget(tableView);
 

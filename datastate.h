@@ -15,11 +15,11 @@ public:
     int count() const;
     void setCount(int count);
 
-    int getX() const;
-    void setX(int value);
+    float getX() const;
+    void setX(float value);
 
-    int getY() const;
-    void setY(int value);
+    float getY() const;
+    void setY(float value);
 
     int getWidth() const;
     void setWidth(int value);
@@ -40,8 +40,8 @@ private:
     QString m_stateRegion;
     QString m_abb;
 
-    int x;
-    int y;
+    float x;
+    float y;
     int width;
     double height;
 };

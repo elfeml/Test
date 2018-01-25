@@ -88,7 +88,7 @@ void MainInterfaceWindow::on_finishLayout_clicked()
 
 void MainInterfaceWindow::on_reset_clicked()
 {
-    ui->openGLWidget->m_StepCount=-1;
+    ui->openGLWidget->m_StepCount=0;
     ui->openGLWidget->m_StepCountState=-5;
     ui->openGLWidget->update();
 }
