@@ -118,37 +118,37 @@ QVector4D Canvas::colorScaleRegion(int a){
        QVector4D stateColor;
 
        if(a<z){
-                       stateColor.setX(( (1.0f)) );
-                       stateColor.setY(( (1.0f)) );
-                       stateColor.setZ(( (0.8f)) ); }
+                       stateColor.setX(( (0.96f)) );
+                       stateColor.setY(( (0.98f)) );
+                       stateColor.setZ(( (1.0f)) ); }
        else if (a<m){
-                       stateColor.setX(( (1.0f)) );
+                       stateColor.setX(( (0.87f)) );
                        stateColor.setY(( (0.92f)) );
-                       stateColor.setZ(( (0.62f)) );}
+                       stateColor.setZ(( (0.96f)) );}
        else if (a<n){
-                       stateColor.setX(( (0.99f)) );
+                       stateColor.setX(( (0.77f)) );
                        stateColor.setY(( (0.85f)) );
-                       stateColor.setZ(( (0.46f)) );}
+                       stateColor.setZ(( (0.93f)) );}
       else if (a<o){
-                       stateColor.setX(( (0.99f)) );
-                       stateColor.setY(( (0.69f)) );
-                       stateColor.setZ(( (0.29f)) );}
+                       stateColor.setX(( (0.61f)) );
+                       stateColor.setY(( (0.79f)) );
+                       stateColor.setZ(( (0.88f)) );}
        else if (a<l){
-                       stateColor.setX(( (0.99f)) );
-                       stateColor.setY(( (0.55f)) );
-                       stateColor.setZ(( (0.23f)) );}
+                       stateColor.setX(( (0.41f)) );
+                       stateColor.setY(( (0.68f)) );
+                       stateColor.setZ(( (0.83f)) );}
        else if (a<s){
-                       stateColor.setX(( (0.98f)) );
-                       stateColor.setY(( (0.30f)) );
-                       stateColor.setZ(( (0.16f)) );}
+                       stateColor.setX(( (0.25f)) );
+                       stateColor.setY(( (0.57f)) );
+                       stateColor.setZ(( (0.77f)) );}
        else if (a<p){
-                       stateColor.setX(( (0.89f)) );
-                       stateColor.setY(( (0.10f)) );
-                       stateColor.setZ(( (0.10f)) );}
+                       stateColor.setX(( (0.12f)) );
+                       stateColor.setY(( (0.44f)) );
+                       stateColor.setZ(( (0.70f)) );}
        else{
-                       stateColor.setX(( (0.69f)) );
-                       stateColor.setY(( (0.00f)) );
-                       stateColor.setZ(( (0.14f)) );}
+                       stateColor.setX(( (0.03f)) );
+                       stateColor.setY(( (0.27f)) );
+                       stateColor.setZ(( (0.68f)) );}
 
        return stateColor;
 
@@ -206,27 +206,42 @@ void Canvas::DrawLegend(){
 
    glBegin( GL_LINE_STRIP );
 
-   QList<QVector4D> colorList;
+   QList<QVector4D> colorListS;
+   QList<QVector4D> colorListR;
 
-        colorList.append(QVector4D(1.0f, 1.0f, 0.8f, 1.0f));
-        colorList.append(QVector4D(1.0f, 0.92f, 0.62f, 1.0f));
-        colorList.append(QVector4D(0.99f, 0.85f, 0.46f, 1.0f));
-        colorList.append(QVector4D(0.99f, 0.69f, 0.29f, 1.0f));
-        colorList.append(QVector4D(0.99f, 0.25f, 0.53f, 1.0f));
-        colorList.append(QVector4D(0.98f, 0.30f, 0.10f, 1.0f));
-        colorList.append(QVector4D(0.89f, 0.10f, 0.10f, 1.0f));
-        colorList.append(QVector4D(0.69f, 0.00f, 0.14f, 1.0f));
+        colorListS.append(QVector4D(1.0f, 1.0f, 0.8f, 1.0f));
+        colorListS.append(QVector4D(1.0f, 0.92f, 0.62f, 1.0f));
+        colorListS.append(QVector4D(0.99f, 0.85f, 0.46f, 1.0f));
+        colorListS.append(QVector4D(0.99f, 0.69f, 0.29f, 1.0f));
+        colorListS.append(QVector4D(0.99f, 0.25f, 0.53f, 1.0f));
+        colorListS.append(QVector4D(0.98f, 0.30f, 0.10f, 1.0f));
+        colorListS.append(QVector4D(0.89f, 0.10f, 0.10f, 1.0f));
+        colorListS.append(QVector4D(0.69f, 0.00f, 0.14f, 1.0f));
+
+        colorListR.append(QVector4D(0.96f, 0.98f, 1.0f, 1.0f));
+        colorListR.append(QVector4D(0.87f, 0.92f, 0.96f, 1.0f));
+        colorListR.append(QVector4D(0.77f, 0.85f, 0.93f, 1.0f));
+        colorListR.append(QVector4D(0.61f, 0.79f, 0.88f, 1.0f));
+        colorListR.append(QVector4D(0.41f, 0.68f, 0.83f, 1.0f));
+        colorListR.append(QVector4D(0.25f, 0.57f, 0.77f, 1.0f));
+        colorListR.append(QVector4D(0.12f, 0.44f, 0.70f, 1.0f));
+        colorListR.append(QVector4D(0.03f, 0.27f, 0.68f, 1.0f));
 
    for ( int i = 0; i < slices; ++i )
    {
-
-     QVector4D color = colorList.at(i);//Get next color
+    if(m_activate)
+    {
+     QVector4D colorS = colorListS.at(i);//Get next color
+     glColor4f( colorS.x(), colorS.y(),colorS.z(),1.0f);
+    }
+    else
+    {
+      QVector4D colorR = colorListR.at(i);//Get next color
+      glColor4f( colorR.x(), colorR.y(),colorR.z(),1.0f);
+    }
 
      //glColor4f( 0, 0, 0, 1.0f ); //black
-
-      glColor4f( color.x(), color.y(),color.z(),1.0f);
-
-      glVertex2f( 105, 25 + ( slice * ( i + 1.0 ) ) );
+     glVertex2f( 105, 25 + ( slice * ( i + 1.0 ) ) );
    }
    glEnd();
 }
@@ -238,7 +253,7 @@ void Canvas::redraw()
     DrawLegend();
     glColor3f(0,0,0);
 
-    int a=1; int k=5;
+    int a=1; int k=0.5;
     int drawState=0;
 
 
@@ -257,8 +272,8 @@ void Canvas::redraw()
         }
 
 
-   if(m_activate){
-
+   if(m_activate)
+   {
       for (int j =0; j<states->size(); ++j)
       {
        QString stateName=(*states)[j].getStateRegion();
@@ -266,7 +281,6 @@ void Canvas::redraw()
 
         if(stateName==regionName)
         {
-
          QVector4D stateColor = colorScaleState(states->at(j).count());
 
           if(m_StepCountState>drawState)
@@ -278,7 +292,7 @@ void Canvas::redraw()
                drawState++;
            }
         }
-       }
+      }
    }
 }
 
